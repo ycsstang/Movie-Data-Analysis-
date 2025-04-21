@@ -1,0 +1,542 @@
+<!doctype html>
+<html lang="en-US" dir="ltr">
+
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+    <title>Phoenix</title>
+    <link rel="apple-touch-icon" sizes="180x180" href="/static/static/img/favicons/apple-touch-icon.png">
+    <link rel="icon" type="image/png" sizes="32x32" href="/static/static/img/favicons/favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="/static/static/img/favicons/favicon-16x16.png">
+    <link rel="shortcut icon" type="image/x-icon" href="/static/static/img/favicons/favicon.ico">
+    <link rel="manifest" href="/static/static/img/favicons/manifest.json">
+    <meta name="msapplication-TileImage" content="static/img/favicons/mstile-150x150.png">
+    <meta name="theme-color" content="#ffffff">
+    <link rel="preconnect" href="https://fonts.gstatic.com/">
+    <link href="/static/static/css/css2.css" rel="stylesheet">
+    <link href="/static/static/css/css21.css" rel="stylesheet">
+    <link href="/static/static/css/phoenix.min.css" rel="stylesheet" id="style-default">
+    <link href="#" rel="stylesheet" id="user-style-default">
+    <style>
+      body {
+        opacity: 0;
+      }
+        /* 星星评分样式 */
+  .star-rating {
+    display: inline-flex;
+    align-items: center;
+    position: relative;
+    height: 20px;
+  }
+
+  .stars-outer {
+    position: relative;
+    display: inline-block;
+    font-size: 14px;
+  }
+
+  .stars-outer::before {
+    content: "★★★★★";
+    color: #ddd;
+  }
+
+  .stars-inner {
+    position: absolute;
+    top: 0;
+    left: 0;
+    white-space: nowrap;
+    overflow: hidden;
+  }
+
+  .stars-inner::before {
+    content: "★★★★★";
+    color: #ffc107;
+  }
+
+  .rating-number {
+    color: #6c757d;
+  }
+
+  /* 分页样式增强 */
+  .pagination .page-item.active .page-link {
+    background-color: #0d6efd;
+    border-color: #0d6efd;
+  }
+  
+  .pagination .page-link {
+    color: #0d6efd;
+  }
+  
+  /* 跳转输入框样式 */
+  #pageJumpInput {
+    text-align: center;
+  }
+  
+  /* 每页显示选择框样式 */
+  #pageSizeSelect {
+    cursor: pointer;
+  }
+    </style>
+  </head>
+
+  <body>
+    <main class="main" id="top">
+      <div class="container-fluid px-0">
+        <nav class="navbar navbar-light navbar-vertical navbar-vibrant navbar-expand-lg">
+          <div class="collapse navbar-collapse" id="navbarVerticalCollapse">
+            <div class="navbar-vertical-content scrollbar">
+              <ul class="navbar-nav flex-column" id="navbarVerticalNav">
+{#                <li class="nav-item"><a class="nav-link active" href="">#}
+{#                    <div class="d-flex align-items-center"><span class="nav-link-icon"><span data-feather="cast"></span></span><span class="nav-link-text">类别分析</span></div>#}
+{#                  </a></li>#}
+
+{#                  数据分析#}
+                <li class="nav-item">
+                  <p class="navbar-vertical-label">数据分析</p>
+
+                   <a class="nav-link " href="/myApp/catChart">
+                    <div class="d-flex align-items-center"><span class="nav-link-icon"><span data-feather="layers"></span></span><span class="nav-link-text">类别分析</span></div>
+                    </a>
+                    <a class="nav-link " href="/myApp/countryChart">
+                    <div class="d-flex align-items-center"><span class="nav-link-icon"><span data-feather="cast"></span></span><span class="nav-link-text">国家分析</span></div>
+                    </a>
+                    <a class="nav-link " href="/myApp/timeChart">
+                   <div class="d-flex align-items-center"><span class="nav-link-icon"><span data-feather="watch"></span></span><span class="nav-link-text">时间分析</span></div>
+                    </a>
+
+{#                    <a class="nav-link" href="starter.html" role="button" data-bs-toggle="" aria-expanded="false">#}
+{#                    <div class="d-flex align-items-center"><span class="nav-link-icon"><span data-feather="flag"></span></span><span class="nav-link-text">Starter</span></div>#}
+{#                  </a><a class="nav-link dropdown-indicator" href="#errors" role="button" data-bs-toggle="collapse" aria-expanded="false" aria-controls="errors">#}
+{#                    <div class="d-flex align-items-center">#}
+{#                      <div class="dropdown-indicator-icon d-flex flex-center"><span class="fas fa-caret-right fs-0"></span></div><span class="nav-link-icon"><span data-feather="alert-triangle"></span></span><span class="nav-link-text">Errors</span>#}
+{#                    </div>#}
+{#                  </a>#}
+{#                  <ul class="nav collapse parent" id="errors">#}
+{#                    <li class="nav-item"><a class="nav-link" href="404.html" data-bs-toggle="" aria-expanded="false">#}
+{#                        <div class="d-flex align-items-center"><span class="nav-link-text">404</span></div>#}
+{#                      </a></li>#}
+{#                    <li class="nav-item"><a class="nav-link" href="500.html" data-bs-toggle="" aria-expanded="false">#}
+{#                        <div class="d-flex align-items-center"><span class="nav-link-text">500</span></div>#}
+{#                      </a></li>#}
+{#                  </ul><a class="nav-link dropdown-indicator" href="#authentication" role="button" data-bs-toggle="collapse" aria-expanded="false" aria-controls="authentication">#}
+{#                    <div class="d-flex align-items-center">#}
+{#                      <div class="dropdown-indicator-icon d-flex flex-center"><span class="fas fa-caret-right fs-0"></span></div><span class="nav-link-icon"><span data-feather="lock"></span></span><span class="nav-link-text">Authentication</span>#}
+{#                    </div>#}
+{#                  </a>#}
+{#                  <ul class="nav collapse parent" id="authentication">#}
+{#                    <li class="nav-item"><a class="nav-link" href="login.html" data-bs-toggle="" aria-expanded="false">#}
+{#                        <div class="d-flex align-items-center"><span class="nav-link-text">Sign in</span></div>#}
+{#                      </a></li>#}
+{#                    <li class="nav-item"><a class="nav-link" href="register.html" data-bs-toggle="" aria-expanded="false">#}
+{#                        <div class="d-flex align-items-center"><span class="nav-link-text">Sign up</span></div>#}
+{#                      </a></li>#}
+{#                    <li class="nav-item"><a class="nav-link" href="sign-out.html" data-bs-toggle="" aria-expanded="false">#}
+{#                        <div class="d-flex align-items-center"><span class="nav-link-text">Sign out</span></div>#}
+{#                      </a></li>#}
+{#                    <li class="nav-item"><a class="nav-link" href="forgot-password.html" data-bs-toggle="" aria-expanded="false">#}
+{#                        <div class="d-flex align-items-center"><span class="nav-link-text">Forgot password</span></div>#}
+{#                      </a></li>#}
+{#                    <li class="nav-item"><a class="nav-link" href="reset-password.html" data-bs-toggle="" aria-expanded="false">#}
+{#                        <div class="d-flex align-items-center"><span class="nav-link-text">Reset password</span></div>#}
+{#                      </a></li>#}
+{#                    <li class="nav-item"><a class="nav-link" href="lock-screen.html" data-bs-toggle="" aria-expanded="false">#}
+{#                        <div class="d-flex align-items-center"><span class="nav-link-text">Lock screen</span></div>#}
+{#                      </a></li>#}
+{#                  </ul>#}
+                </li>
+
+                <li class="nav-item">
+                  <p class="navbar-vertical-label">数据总览</p>
+
+                    <a class="nav-link " href="/myApp/totalMovie">
+                    <div class="d-flex align-items-center"><span class="nav-link-icon"><span data-feather="flag"></span></span><span class="nav-link-text">数据总览</span></div>
+                    </a>
+                </li>
+                <li class="nav-item">
+                  <p class="navbar-vertical-label">个人信息</p>
+
+                    <a class="nav-link " href="">
+                    <div class="d-flex align-items-center"><span class="nav-link-icon"><span data-feather="user"></span></span><span class="nav-link-text">个人信息修改</span></div>
+                    </a>
+                    <a class="nav-link " href="">
+                    <div class="d-flex align-items-center"><span class="nav-link-icon"><span data-feather="heart"></span></span><span class="nav-link-text">个人收藏</span></div>
+                    </a>
+                </li>
+
+
+                <li class="nav-item">
+                  <p class="navbar-vertical-label">预测</p>
+
+                    <a class="nav-link " href="">
+                    <div class="d-flex align-items-center"><span class="nav-link-icon"><span data-feather="flag"></span></span><span class="nav-link-text">票房预测</span></div>
+                    </a>
+                </li>
+
+                <li class="nav-item">
+                  <p class="navbar-vertical-label">推荐</p>
+
+                    <a class="nav-link " href="">
+                    <div class="d-flex align-items-center"><span class="nav-link-icon"><span data-feather="star"></span></span><span class="nav-link-text">电影推荐</span></div>
+                    </a>
+                </li>
+
+                <li class="nav-item">
+                  <p class="navbar-vertical-label">数据词云图</p>
+
+                    <a class="nav-link " href="">
+                    <div class="d-flex align-items-center"><span class="nav-link-icon"><span data-feather="cloud"></span></span><span class="nav-link-text">词云图</span></div>
+                    </a>
+                </li>
+
+              </ul>
+            </div>
+            <div class="navbar-vertical-footer"><a class="btn btn-link border-0 fw-semi-bold d-flex ps-0" href="#!"><span class="navbar-vertical-footer-icon" data-feather="log-out"></span><span>Settings</span></a></div>
+          </div>
+        </nav>
+        <nav class="navbar navbar-light navbar-vertical navbar-vibrant navbar-expand-lg">
+          <div class="collapse navbar-collapse" id="navbarVerticalCollapse">
+            <div class="navbar-vertical-content scrollbar">
+              <ul class="navbar-nav flex-column" id="navbarVerticalNav">
+{#                <li class="nav-item"><a class="nav-link active" href="">#}
+{#                    <div class="d-flex align-items-center"><span class="nav-link-icon"><span data-feather="cast"></span></span><span class="nav-link-text">类别分析</span></div>#}
+{#                  </a></li>#}
+
+{#                  数据分析#}
+                <li class="nav-item">
+                  <p class="navbar-vertical-label">数据分析</p>
+
+                   <a class="nav-link " href="/myApp/catChart">
+                    <div class="d-flex align-items-center"><span class="nav-link-icon"><span data-feather="layers"></span></span><span class="nav-link-text">类别分析</span></div>
+                    </a>
+                    <a class="nav-link " href="/myApp/countryChart">
+                    <div class="d-flex align-items-center"><span class="nav-link-icon"><span data-feather="cast"></span></span><span class="nav-link-text">国家分析</span></div>
+                    </a>
+                    <a class="nav-link " href="/myApp/timeChart">
+                   <div class="d-flex align-items-center"><span class="nav-link-icon"><span data-feather="watch"></span></span><span class="nav-link-text">时间分析</span></div>
+                    </a>
+
+{#                    <a class="nav-link" href="starter.html" role="button" data-bs-toggle="" aria-expanded="false">#}
+{#                    <div class="d-flex align-items-center"><span class="nav-link-icon"><span data-feather="flag"></span></span><span class="nav-link-text">Starter</span></div>#}
+{#                  </a><a class="nav-link dropdown-indicator" href="#errors" role="button" data-bs-toggle="collapse" aria-expanded="false" aria-controls="errors">#}
+{#                    <div class="d-flex align-items-center">#}
+{#                      <div class="dropdown-indicator-icon d-flex flex-center"><span class="fas fa-caret-right fs-0"></span></div><span class="nav-link-icon"><span data-feather="alert-triangle"></span></span><span class="nav-link-text">Errors</span>#}
+{#                    </div>#}
+{#                  </a>#}
+{#                  <ul class="nav collapse parent" id="errors">#}
+{#                    <li class="nav-item"><a class="nav-link" href="404.html" data-bs-toggle="" aria-expanded="false">#}
+{#                        <div class="d-flex align-items-center"><span class="nav-link-text">404</span></div>#}
+{#                      </a></li>#}
+{#                    <li class="nav-item"><a class="nav-link" href="500.html" data-bs-toggle="" aria-expanded="false">#}
+{#                        <div class="d-flex align-items-center"><span class="nav-link-text">500</span></div>#}
+{#                      </a></li>#}
+{#                  </ul><a class="nav-link dropdown-indicator" href="#authentication" role="button" data-bs-toggle="collapse" aria-expanded="false" aria-controls="authentication">#}
+{#                    <div class="d-flex align-items-center">#}
+{#                      <div class="dropdown-indicator-icon d-flex flex-center"><span class="fas fa-caret-right fs-0"></span></div><span class="nav-link-icon"><span data-feather="lock"></span></span><span class="nav-link-text">Authentication</span>#}
+{#                    </div>#}
+{#                  </a>#}
+{#                  <ul class="nav collapse parent" id="authentication">#}
+{#                    <li class="nav-item"><a class="nav-link" href="login.html" data-bs-toggle="" aria-expanded="false">#}
+{#                        <div class="d-flex align-items-center"><span class="nav-link-text">Sign in</span></div>#}
+{#                      </a></li>#}
+{#                    <li class="nav-item"><a class="nav-link" href="register.html" data-bs-toggle="" aria-expanded="false">#}
+{#                        <div class="d-flex align-items-center"><span class="nav-link-text">Sign up</span></div>#}
+{#                      </a></li>#}
+{#                    <li class="nav-item"><a class="nav-link" href="sign-out.html" data-bs-toggle="" aria-expanded="false">#}
+{#                        <div class="d-flex align-items-center"><span class="nav-link-text">Sign out</span></div>#}
+{#                      </a></li>#}
+{#                    <li class="nav-item"><a class="nav-link" href="forgot-password.html" data-bs-toggle="" aria-expanded="false">#}
+{#                        <div class="d-flex align-items-center"><span class="nav-link-text">Forgot password</span></div>#}
+{#                      </a></li>#}
+{#                    <li class="nav-item"><a class="nav-link" href="reset-password.html" data-bs-toggle="" aria-expanded="false">#}
+{#                        <div class="d-flex align-items-center"><span class="nav-link-text">Reset password</span></div>#}
+{#                      </a></li>#}
+{#                    <li class="nav-item"><a class="nav-link" href="lock-screen.html" data-bs-toggle="" aria-expanded="false">#}
+{#                        <div class="d-flex align-items-center"><span class="nav-link-text">Lock screen</span></div>#}
+{#                      </a></li>#}
+{#                  </ul>#}
+                </li>
+
+                <li class="nav-item">
+                  <p class="navbar-vertical-label">数据总览</p>
+
+                    <a class="nav-link " href="/myApp/totalMovies">
+                    <div class="d-flex align-items-center"><span class="nav-link-icon"><span data-feather="flag"></span></span><span class="nav-link-text">数据总览</span></div>
+                    </a>
+                </li>
+                <li class="nav-item">
+                  <p class="navbar-vertical-label">个人信息</p>
+
+                    <a class="nav-link " href="">
+                    <div class="d-flex align-items-center"><span class="nav-link-icon"><span data-feather="user"></span></span><span class="nav-link-text">个人信息修改</span></div>
+                    </a>
+                    <a class="nav-link " href="">
+                    <div class="d-flex align-items-center"><span class="nav-link-icon"><span data-feather="heart"></span></span><span class="nav-link-text">个人收藏</span></div>
+                    </a>
+                </li>
+
+
+                <li class="nav-item">
+                  <p class="navbar-vertical-label">预测</p>
+
+                    <a class="nav-link " href="">
+                    <div class="d-flex align-items-center"><span class="nav-link-icon"><span data-feather="flag"></span></span><span class="nav-link-text">票房预测</span></div>
+                    </a>
+                </li>
+
+                <li class="nav-item">
+                  <p class="navbar-vertical-label">推荐</p>
+
+                    <a class="nav-link " href="">
+                    <div class="d-flex align-items-center"><span class="nav-link-icon"><span data-feather="star"></span></span><span class="nav-link-text">电影推荐</span></div>
+                    </a>
+                </li>
+
+                <li class="nav-item">
+                  <p class="navbar-vertical-label">数据词云图</p>
+
+                    <a class="nav-link " href="">
+                    <div class="d-flex align-items-center"><span class="nav-link-icon"><span data-feather="cloud"></span></span><span class="nav-link-text">词云图</span></div>
+                    </a>
+                </li>
+
+              </ul>
+            </div>
+
+
+            <div class="navbar-vertical-footer"><a class="btn btn-link border-0 fw-semi-bold d-flex ps-0" href="#!"><span class="navbar-vertical-footer-icon" data-feather="log-out"></span><span>Settings</span></a></div>
+          </div>
+        </nav>
+        <nav class="navbar navbar-light navbar-top navbar-expand">
+          <div class="navbar-logo"><button class="btn navbar-toggler navbar-toggler-humburger-icon" type="button" data-bs-toggle="collapse" data-bs-target="#navbarVerticalCollapse" aria-controls="navbarVerticalCollapse" aria-expanded="false" aria-label="Toggle Navigation"><span class="navbar-toggle-icon"><span class="toggle-line"></span></span></button> <a class="navbar-brand me-1 me-sm-3" href="">
+              <div class="d-flex align-items-center">
+                <div class="d-flex align-items-center"><img src="/static/static/picture/logo.png" alt="phoenix" width="32">
+                  <p class="logo-text ms-2 d-none d-sm-block">电影数据分析</p>
+                </div>
+              </div>
+            </a></div>
+          <div class="collapse navbar-collapse">
+
+            <ul class="navbar-nav navbar-nav-icons ms-auto flex-row">
+
+              <li class="nav-item dropdown"><a class="nav-link lh-1 px-0 ms-5" id="navbarDropdownUser" href="#" role="button" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                  <div class="avatar avatar-l"><img class="rounded-circle" src="/static/static/picture/57.png" alt=""></div>
+                </a>
+                <div class="dropdown-menu dropdown-menu-end py-0 dropdown-profile shadow border border-300" aria-labelledby="navbarDropdownUser">
+                  <div class="card bg-white position-relative border-0">
+                    <div class="card-body p-0 overflow-auto scrollbar" style="height: 18rem;">
+                      <div class="text-center pt-4 pb-3">
+                        <div class="avatar avatar-xl"><img class="rounded-circle" src="/static/static/picture/57.png" alt=""></div>
+                        <h6 class="mt-2">{{ userInfo.username }}</h6>
+                      </div>
+                      <div class="mb-3 mx-3"><input class="form-control form-control-sm" id="exampleFormControlInput1" placeholder="Update your status"></div>
+                      <ul class="nav d-flex flex-column mb-2 pb-1">
+                        <li class="nav-item"><a class="nav-link px-3" href="#!"><span class="me-2 text-900" data-feather="user"></span>个人信息</a></li>
+                        <li class="nav-item"><a class="nav-link px-3" href="#!"><span class="me-2 text-900" data-feather="pie-chart"></span>Dashboard</a></li>
+                        <li class="nav-item"><a class="nav-link px-3" href="#!"><span class="me-2 text-900" data-feather="lock"></span>Posts &amp; Activity</a></li>
+
+                      </ul>
+                    </div>
+                    <div class="card-footer p-0 border-top">
+                      <ul class="nav d-flex flex-column my-3">
+                        <li class="nav-item"><a class="nav-link px-3" href="#!"><span class="me-2 text-900" data-feather="user-plus"></span>Add another account</a></li>
+                      </ul>
+                      <hr>
+                      <div class="px-3"><a class="btn btn-phoenix-secondary d-flex flex-center w-100" href="/myApp/login"><span class="me-2" data-feather="log-out"></span>退出登录</a></div>
+                      <div class="my-2 text-center fw-bold fs--2 text-600"><a class="text-600 me-1" href="#!">Privacy policy</a>&bull;<a class="text-600 mx-1" href="#!">Terms</a>&bull;<a class="text-600 ms-1" href="#!">Cookies</a></div>
+                    </div>
+                  </div>
+                </div>
+              </li>
+            </ul>
+          </div>
+        </nav>
+        <div class="content pt-5">
+          <div class="mx-n6 bg-white px-6 pt-7 border-y border-300">
+            <div class="row">
+              <div data-list='{"valueNames":["product","customer","rating","review","time"],"page":6}'>
+                <div class="row align-items-end justify-content-between pb-5 g-3">
+                  <div class="col-auto">
+                    <h3>电影数据总览</h3>
+                    <p class="text-700 lh-sm mb-0">Total Movies</p>
+                  </div>
+                  <div class="col-12 col-md-auto">
+                    <div class="row g-2">
+                      <div class="col-auto flex-1">
+                        <div class="search-box mb-3">
+                          <form method="get" class="position-relative" data-bs-toggle="search" data-bs-display="static">
+                            <input class="form-control form-control-sm search-input search" 
+                                   type="search" 
+                                   name="q"
+                                   placeholder="搜索电影名称、国家、演员或导演..." 
+                                   value="{{ search_query }}"
+                                   aria-label="Search">
+                            <span class="fas fa-search search-box-icon"></span>
+                          </form>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+                <div class="table-responsive mx-n1 px-1 scrollbar">
+                  <table class="table fs--2 mb-0 overflow-hidden">
+                    <thead>
+                      <tr>
+                        <th class="white-space-nowrap fs--1 border-top ps-0 align-middle">
+                          <div class="form-check mb-0 fs-0"><input class="form-check-input" type="checkbox"></div>
+                        </th>
+                        <th class="sort border-top white-space-nowrap align-middle" scope="col" style="min-width:200px;" data-sort="product">电影名称</th>
+                        <th class="sort border-top align-middle" scope="col" data-sort="customer" style="min-width:100px;">国家</th>
+                        <th class="sort border-top align-middle" scope="col" data-sort="rating" style="min-width:100px;">评分</th>
+                        <th class="sort border-top align-middle" scope="col" style="max-width:350px;" data-sort="review">电影简介</th>
+                        <th class="sort border-top text-start ps-5 align-middle" scope="col" data-sort="status">演员</th>
+                        <th class="sort border-top text-end align-middle" scope="col" data-sort="time">导演</th>
+                        <th class="sort border-top text-end pe-0 align-middle" scope="col">发行日期</th>
+                        <th class="sort border-top text-end pe-0 align-middle" scope="col">票房</th>
+                      </tr>
+                    </thead>
+                    <tbody class="list" id="table-latest-review-body">
+                      {% for movieitem in movieData %}
+                      <tr class="hover-actions-trigger btn-reveal-trigger position-static">
+                        <td class="fs--1 align-middle ps-0" style="width: 28px;">
+                          <div class="form-check mb-0 fs-0"><input class="form-check-input" type="checkbox"></div>
+                        </td>
+                        <td class="align-middle product white-space-nowrap" style="min-width:200px;">
+                          <h6 class="fw-semi-bold mb-0">{{ movieitem.1 }}</h6>
+                        </td>
+                        <td class="align-middle customer white-space-nowrap" style="min-width:100px;">
+                          <div class="d-flex align-items-center">
+                            <div class="avatar avatar-l">
+                              <div class="avatar-name rounded-circle"><span>{{ movieitem.3.0 }}</span></div>
+                            </div>
+                            <h6 class="mb-0 ms-3 text-900">{{ movieitem.3 }}</h6>
+                          </div>
+                        </td>
+                        <td class="align-middle rating white-space-nowrap" style="min-width:110px;">
+                            <div class="stars-outer">
+                              <div class="stars-inner" style="width: calc({{ movieitem.6 }}% )"></div>
+                          </div>
+                        </td>
+                        <td class="align-middle review" style="min-width:350px;width:500px;">
+                          <p class="fs--1 fw-semi-bold text-1000 mb-0" style="max-width: 100%;" data-bs-toggle="tooltip" data-bs-placement="top" title="{{ movieitem.7 }}">{{ movieitem.7 }}</p>
+                        </td>
+                        <td class="align-middle text-start ps-5 status">
+                          <span class="badge fs--1 badge-light-primary">{{ movieitem.9 }}</span>
+                        </td>
+                        <td class="align-middle text-end time white-space-nowrap">
+                          <div>
+                            <span class="badge fs--1 badge-light-info">{{ movieitem.8 }}</span>
+                          </div>
+                        </td>
+                        <td class="align-middle text-end time white-space-nowrap">
+                          <div>
+                            <span class="badge fs--1 badge-light-secondary">{{ movieitem.5 }}</span>
+                          </div>
+                        </td>
+                        <td class="align-middle text-end time white-space-nowrap">
+                          <div class="hover-hide">
+                            <span class="badge fs--1 badge-light-success">{{ movieitem.12 }}</span>
+                          </div>
+                        </td>
+                        <td class="align-middle white-space-nowrap text-end pe-0">
+                          <div class="position-relative">
+                            <div class="hover-actions"><button class="btn btn-sm btn-phoenix-secondary me-1 fs--2"><span class="fas fa-check"></span></button><button class="btn btn-sm btn-phoenix-secondary fs--2"><span class="fas fa-trash"></span></button></div>
+                          </div>
+
+                        </td>
+                      </tr>
+                      {% endfor %}
+                    </tbody>
+                  </table>
+                </div>
+               
+                              <!-- 分页组件 -->
+                <div class="d-flex justify-content-between align-items-center mt-3">
+
+                  <nav aria-label="Page navigation">
+                    <ul class="pagination mb-0">
+                      {% if page_obj.has_previous %}
+                        <li class="page-item">
+                          <a class="page-link" href="?{% if search_query %}q={{ search_query }}&{% endif %}page=1&{% if page_size %}page_size={{ page_size }}{% endif %}" aria-label="First">
+                            <span aria-hidden="true">&laquo;&laquo;</span>
+                          </a>
+                        </li>
+                        <li class="page-item">
+                          <a class="page-link" href="?{% if search_query %}q={{ search_query }}&{% endif %}page={{ page_obj.previous_page_number }}&{% if page_size %}page_size={{ page_size }}{% endif %}" aria-label="Previous">
+                            <span aria-hidden="true">&laquo;</span>
+                          </a>
+                        </li>
+                      {% endif %}
+                      
+                      {% for num in page_obj.paginator.page_range %}
+                        {% if num == page_obj.number %}
+                          <li class="page-item active">
+                            <a class="page-link" href="?{% if search_query %}q={{ search_query }}&{% endif %}page={{ num }}&{% if page_size %}page_size={{ page_size }}{% endif %}">{{ num }}</a>
+                          </li>
+                        {% elif num > page_obj.number|add:'-3' and num < page_obj.number|add:'3' %}
+                          <li class="page-item">
+                            <a class="page-link" href="?{% if search_query %}q={{ search_query }}&{% endif %}page={{ num }}&{% if page_size %}page_size={{ page_size }}{% endif %}">{{ num }}</a>
+                          </li>
+                        {% endif %}
+                      {% endfor %}
+                      
+                      {% if page_obj.has_next %}
+                        <li class="page-item">
+                          <a class="page-link" href="?{% if search_query %}q={{ search_query }}&{% endif %}page={{ page_obj.next_page_number }}&{% if page_size %}page_size={{ page_size }}{% endif %}" aria-label="Next">
+                            <span aria-hidden="true">&raquo;</span>
+                          </a>
+                        </li>
+                        <li class="page-item">
+                          <a class="page-link" href="?{% if search_query %}q={{ search_query }}&{% endif %}page={{ page_obj.paginator.num_pages }}&{% if page_size %}page_size={{ page_size }}{% endif %}" aria-label="Last">
+                            <span aria-hidden="true">&raquo;&raquo;</span>
+                          </a>
+                        </li>
+                      {% endif %}
+                    </ul>
+                  </nav>
+                  
+                  <div class="d-flex align-items-center">
+                    <span class="me-2">跳转到:</span>
+                    <input type="number" class="form-control form-control-sm" style="width: 60px;" 
+                           id="pageJumpInput" min="1" max="{{ page_obj.paginator.num_pages }}" 
+                           value="{{ page_obj.number }}">
+                    <button class="btn btn-sm btn-primary ms-2" id="pageJumpBtn">跳转</button>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+          <footer class="footer">
+            <div class="row g-0 justify-content-between align-items-center h-100 mb-3">
+              <div class="col-12 col-sm-auto text-center">
+                <p class="mb-0 text-900">数据来源：猫眼电影.</p>
+              </div>
+
+            </div>
+          </footer>
+        </div>
+      </div>
+    </main>
+    <script src="/static/static/js/phoenix.js"></script>
+    <script src="/static/static/js/ecommerce-dashboard.js"></script>
+
+</body>
+<script>
+  // 页码跳转功能 - 保留所有参数
+  document.getElementById('pageJumpBtn').addEventListener('click', function() {
+    const pageNum = document.getElementById('pageJumpInput').value;
+    const searchQuery = "{{ search_query }}";
+    
+    if(pageNum >= 1 && pageNum <= {{ page_obj.paginator.num_pages }}) {
+        let url = '?';
+        if(searchQuery) {
+            url += `q=${encodeURIComponent(searchQuery)}&`;
+        }
+        url += `page=${pageNum}`;
+        window.location.href = url;
+    }
+  });
+  
+</script>
+
+</html>

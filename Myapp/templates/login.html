@@ -1,0 +1,83 @@
+<!doctype html>
+<html lang="en-US" dir="ltr">
+
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+    <title>登录</title>
+    <link rel="apple-touch-icon" sizes="180x180" href="/static/static/img/favicons/apple-touch-icon.png">
+    <link rel="icon" type="image/png" sizes="32x32" href="/static/static/img/favicons/favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="/static/static/img/favicons/favicon-16x16.png">
+    <link rel="shortcut icon" type="image/x-icon" href="/static/static/img/favicons/favicon.ico">
+    <link rel="manifest" href="/static/static/img/favicons/manifest.json">
+    <meta name="msapplication-TileImage" content="../static/img/favicons/mstile-150x150.png">
+    <meta name="theme-color" content="#ffffff">
+    <link rel="preconnect" href="https://fonts.gstatic.com/">
+    <link href="/static/static/css/css2.css" rel="stylesheet">
+    <link href="/static/static/css/css21.css" rel="stylesheet">
+    <link href="/static/static/css/phoenix.min.css" rel="stylesheet" id="style-default">
+    <link href="#" rel="stylesheet" id="user-style-default">
+    <style>
+      body {
+        opacity: 0;
+      }
+    </style>
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>  
+  </head>
+
+  <body>
+    <main class="main" id="top">
+      <div class="container-fluid px-0">
+        <div class="container">
+          <div class="row flex-center min-vh-100 py-5">
+            <div class="col-sm-10 col-md-8 col-lg-5 col-xl-5 col-xxl-3"><a class="d-flex flex-center text-decoration-none mb-4" href="index.html">
+                <div class="d-flex align-items-center"><img src="/static/static/picture/logo.png" alt="phoenix" width="58"></div>
+              </a>
+              <div class="text-center mb-7">
+                <h3>登录</h3>
+                <p class="text-700">Get access to your account</p>
+              </div>
+              <div class="position-relative mt-4">
+                <hr class="bg-200">
+                <div class="divider-content-center">or use email</div>
+              </div>
+
+
+              <form method="post" action="/myApp/login/">
+                  <div class="mb-3 text-start"><label class="form-label" for="username">用户名</label>
+                    <div class="form-icon-container"><input name="username" class="form-control form-icon-input" id="username" type="user" placeholder="请输入用户名"><span class="fas fa-user text-900 fs--1 form-icon"></span></div>
+                  </div>
+                  <div class="mb-3 text-start"><label class="form-label" for="password">密码</label>
+                    <div class="form-icon-container"><input name="password" class="form-control form-icon-input" type="password" placeholder="请输入密码"><span class="fas fa-user text-900 fs--1 form-icon"></span></div>
+                  </div>
+                  <div class="row flex-between-center mb-7">
+                      <div class="col-auto">
+                        <div class="form-check mb-0"><input class="form-check-input" id="basic-checkbox" type="checkbox" checked="checked"><label class="form-check-label mb-0" for="basic-checkbox">记住密码</label></div>
+                      </div>
+                      <div class="col-auto"><a class="fs--1 fw-semi-bold" href="#!">忘记密码?</a></div>
+                  </div><button class="btn btn-primary w-100 mb-3">登录</button>
+                  <div class="text-center"><a class="fs--1 fw-bold" href="/myApp/register">创建账号</a></div>
+              </form>
+            </div>
+          </div>
+        </div>
+      </div>
+    </main>
+    <script src="/static/static/js/phoenix.js"></script>
+  </body>
+
+</html>
+
+{% if messages %}
+<script>
+    {% for message in messages %}
+        Swal.fire({
+            title: "{{ message.tags|title }}",  // 消息类型（Error/Success）
+            text: "{{ message }}",
+            icon: "{{ message.tags }}",  // 自动匹配图标
+            confirmButtonText: "OK"
+        });
+    {% endfor %}
+</script>
+{% endif %}

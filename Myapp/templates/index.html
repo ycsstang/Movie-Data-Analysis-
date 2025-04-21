@@ -1,0 +1,1159 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<link rel="stylesheet" href="/static/res/style.css">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
+
+{#    <link rel="stylesheet" href="//at.alicdn.com/t/c/font_4736033_ux3qpx9j9w.css">#}
+<title>大屏分析</title>
+<!-- 模板样例CSS，导入后可删除 -->
+<style type="text/css">
+
+body::after{
+	{#content: "DataGear（http://datagear.tech）";#}
+	position: absolute;
+	left: 0.1rem;
+	top: 0.1rem;
+}
+.layout-center .panel{
+	border: 1px dashed #2684ff;
+}
+.chart::after{
+	content: "图表";
+	position: absolute;
+	top: 50%;
+	left: 50%;
+	margin-top: -1rem;
+	margin-left: -1rem;
+	opacity: 0.8;
+}
+
+    .data-card:hover {
+        transform: translateY(-5px);
+        box-shadow: 0 8px 25px rgba(41, 117, 215, 0.2);
+        border-color: rgba(41, 117, 215, 0.5);
+    }
+    
+    .card-icon {
+        transition: all 0.3s ease;
+    }
+    
+    .data-card:hover .card-icon {
+        transform: scale(1.1);
+        background: linear-gradient(135deg, rgba(41, 117, 215, 0.3) 0%, rgba(16, 71, 150, 0.4) 100%);
+    }
+
+
+.btn-primary{
+    position: absolute;
+    right: 2%;
+    top: 39%;
+    color: #fff;
+    background-color: #2975d7;
+    border-color: #405fba;
+    height: 30px;
+    width: 60px;
+    border-radius: 10px;
+}
+
+
+.movie-list-container {
+    font-family: 'Microsoft YaHei', sans-serif;
+    padding: 15px;
+    background: #031f2d;
+    border-radius: 8px;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+}
+
+.movie-list-header {
+    display: flex;
+    padding: 12px 0;
+    border-bottom: 1px solid rgba(160,215,231,0.2);
+    color: #A0D7E7;
+    font-weight: bold;
+}
+
+.movie-item {
+    display: flex;
+    align-items: center;
+    padding: 12px 0;
+    border-bottom: 1px solid rgba(160,215,231,0.1);
+    transition: background 0.3s ease;
+}
+
+.movie-item:hover {
+    background: rgba(160,215,231,0.05);
+}
+
+.col-name, .col-type, .col-boxoffice, .col-time {
+    padding: 0 15px;
+    flex: 1;
+}
+
+.col-name { flex: 2; }
+.col-boxoffice { flex: 1.2; text-align: right; }
+
+.text-ellipsis {
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    max-width: 100%;
+}
+
+/* 响应式设计 */
+@media (max-width: 768px) {
+    .movie-list-header { display: none; }
+
+    .movie-item {
+        flex-wrap: wrap;
+        padding: 15px 0;
+    }
+
+    .col-name {
+        flex: 100%;
+        font-size: 16px;
+        margin-bottom: 8px;
+    }
+
+    .col-type, .col-boxoffice, .col-time {
+        flex: 1;
+        font-size: 14px;
+        text-align: left !important;
+    }
+}
+</style>
+</head>
+<body class="fill-parent"
+	dg-chart-options="{title:{show:false},legend:{top:0},grid:{top:25}}"
+	dg-chart-auto-resize="true"
+	dg-chart-theme="{color:'#2684ff',backgroundColor:'transparent',actualBackgroundColor:'#142233'}">
+<div class="head">
+	<div class="title">电影分析 </div>
+                <a href="/myApp/catChart" style="text-decoration: none;color: #fff"><button type="button" class="btn btn-primary">系统</button></a>
+
+    
+
+</div>
+<div class="content">
+	<div class="layout layout-left-top">
+		<div class="panel panel-bg no-title-bg">
+			<div class="title"></div>
+
+             <div id="mainA" style="width: 100%;height: 100%"></div>
+		</div>
+	</div>
+	<div class="layout layout-left-center">
+		<div class="panel">
+			<div class="title">Top10电影信息</div>
+			<div id="mainX" style="width: 100%;height: 450PX">
+                <div class="row_list">
+                    <ul class="cases_list" style="height: 450px;overflow: auto;">
+                        <li style="font-size: 15px;margin-top: 9px">
+                            <div>片名</div>
+                            <div>类型</div>
+                            <div>票房</div>
+                            <div style="width: 60px">上映时间</div>
+                        </li>
+                        {% for name, type, ticket, time in zipData %}
+                            <li style="margin-top: 7px">
+                                <div>
+                                    <div style="height: 80px;text-overflow: ellipsis;line-height: 25px" >{{ name }}</div>
+                                </div>
+                                <div style="height: 80px;overflow: hidden;line-height: 25px"> {{ type }} </div>
+                                <div style="height: 80px;overflow: hidden;line-height: 25px"> {{ ticket }} </div>
+                                <div style="height: 80px;width: 100px ;overflow: hidden;line-height: 25px">{{ time }}</div>
+                            </li>
+                        {% endfor %}
+                    </ul>
+                </div>
+            </div>
+		</div>
+	</div>
+
+	<div class="layout layout-center">
+		<div class="layout layout-center-main">
+			<div class="data-cards-container" style="display: flex; width: 100%; height: 100%; gap: 15px; padding: 0 10px;">
+    <!-- 最高票房卡片 -->
+    <div class="data-card" style="
+        flex: 1;
+        background: linear-gradient(135deg, rgba(41, 117, 215, 0.1) 0%, rgba(16, 71, 150, 0.2) 100%);
+        border: 1px solid rgba(41, 117, 215, 0.3);
+        border-radius: 12px;
+        padding: 20px;
+        text-align: center;
+        box-shadow: 0 4px 20px rgba(41, 117, 215, 0.1);
+        transition: all 0.3s ease;
+        backdrop-filter: blur(5px);
+    ">
+        <div class="card-icon" style="
+            width: 60px;
+            height: 60px;
+            margin: 0 auto 15px;
+            background: linear-gradient(135deg, rgba(41, 117, 215, 0.2) 0%, rgba(16, 71, 150, 0.3) 100%);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        ">
+            <i class="fas fa-trophy" style="
+                font-size: 28px;
+                color: #ffd700;
+                text-shadow: 0 0 10px rgba(255, 215, 0, 0.3);
+            "></i>
+        </div>
+        <h3 style="
+            color: #e0e9ff;
+            font-size: 18px;
+            margin: 0 0 10px;
+            font-weight: 500;
+        ">最高票房</h3>
+        <p class="card-value" style="
+            color: #fff;
+            font-size: 24px;
+            font-weight: bold;
+            margin: 0;
+            text-shadow: 0 0 10px rgba(255, 255, 255, 0.2);
+        ">{{ maxTicket | safe }}</p>
+    </div>
+
+    <!-- 最高票房电影卡片 -->
+    <div class="data-card" style="
+        flex: 1;
+        background: linear-gradient(135deg, rgba(41, 117, 215, 0.1) 0%, rgba(16, 71, 150, 0.2) 100%);
+        border: 1px solid rgba(41, 117, 215, 0.3);
+        border-radius: 12px;
+        padding: 20px;
+        text-align: center;
+        box-shadow: 0 4px 20px rgba(41, 117, 215, 0.1);
+        transition: all 0.3s ease;
+        backdrop-filter: blur(5px);
+    ">
+        <div class="card-icon" style="
+            width: 60px;
+            height: 60px;
+            margin: 0 auto 15px;
+            background: linear-gradient(135deg, rgba(41, 117, 215, 0.2) 0%, rgba(16, 71, 150, 0.3) 100%);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        ">
+            <i class="fas fa-film" style="
+                font-size: 28px;
+                color: #ff6b6b;
+                text-shadow: 0 0 10px rgba(255, 107, 107, 0.3);
+            "></i>
+        </div>
+        <h3 style="
+            color: #e0e9ff;
+            font-size: 18px;
+            margin: 0 0 10px;
+            font-weight: 500;
+        ">最高票房电影</h3>
+        <p class="card-value" style="
+            color: #fff;
+            font-size: 20px;
+            font-weight: bold;
+            margin: 0;
+            text-shadow: 0 0 10px rgba(255, 255, 255, 0.2);
+            line-height: 1.3;
+            min-height: 60px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        ">{{ maxTicketMovie | safe }}</p>
+    </div>
+
+    <!-- 最高票房电影类型卡片 -->
+    <div class="data-card" style="
+        flex: 1;
+        background: linear-gradient(135deg, rgba(41, 117, 215, 0.1) 0%, rgba(16, 71, 150, 0.2) 100%);
+        border: 1px solid rgba(41, 117, 215, 0.3);
+        border-radius: 12px;
+        padding: 20px;
+        text-align: center;
+        box-shadow: 0 4px 20px rgba(41, 117, 215, 0.1);
+        transition: all 0.3s ease;
+        backdrop-filter: blur(5px);
+    ">
+        <div class="card-icon" style="
+            width: 60px;
+            height: 60px;
+            margin: 0 auto 15px;
+            background: linear-gradient(135deg, rgba(41, 117, 215, 0.2) 0%, rgba(16, 71, 150, 0.3) 100%);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        ">
+            <i class="fas fa-tags" style="
+                font-size: 28px;
+                color: #20c997;
+                text-shadow: 0 0 10px rgba(32, 201, 151, 0.3);
+            "></i>
+        </div>
+        <h3 style="
+            color: #e0e9ff;
+            font-size: 18px;
+            margin: 0 0 10px;
+            font-weight: 500;
+        ">最高票房电影类型</h3>
+        <p class="card-value" style="
+            color: #fff;
+            font-size: 20px;
+            font-weight: bold;
+            margin: 0;
+            text-shadow: 0 0 10px rgba(255, 255, 255, 0.2);
+        ">{{ maxTicketMoiveType | safe }}</p>
+    </div>
+</div>
+
+			<div class="layout layout-center-bottom">
+				<div class="panel no-title-bg">
+					<div class="title">标题4</div>
+
+                     <div id="mainB" style="width: 100%;height: 100%"></div>
+				</div>
+			</div>
+		</div>
+	</div>
+	<div class="layout layout-right-top">
+		<div class="panel">
+			<div class="title">标题5</div>
+			 <div id="mainC" style="width: 100%;height: 100%"></div>
+		</div>
+	</div>
+	<div class="layout layout-right-center">
+		<div class="panel">
+			<div class="title">标题6</div>
+		 <div id="mainD" style="width: 100%;height: 100%"></div>
+		</div>
+	</div>
+	<div class="layout layout-right-bottom">
+		<div class="panel">
+			<div class="title">标题7</div>
+			 <div id="mainE" style="width: 100%;height: 100%"></div>
+		</div>
+	</div>
+</div>
+
+
+<style>
+    .row_list {
+        list-style: none;
+    }
+
+    .cases_list::-webkit-scrollbar {
+        display: none;
+    }
+
+    .cases_list li {
+        display: grid;
+        -ms-grid-columns: 15% 30% 20% 10% 25%;
+        grid-template-columns: 15% 30% 20% 10% 25%;
+        cursor: pointer;
+        {#margin-left: 3px;#}
+        font-size: 13px;
+        text-align: center;
+        line-height: 30px;
+        color: rgb(238, 236, 236);
+    }
+</style>
+<script src="/static/static/echarts.js"></script>
+
+
+
+<script>
+    var chartDom = document.getElementById('mainA');
+    var myChart = echarts.init(chartDom);
+    var option;
+
+    // 修改为更现代的渐变色系
+    var colorList = [
+        'rgba(127, 127, 213, 0.8)',
+        'rgba(118, 225, 152, 0.8)',
+        'rgba(62, 203, 207, 0.8)',
+        'rgba(73, 144, 226, 0.8)',
+        'rgba(241, 187, 76, 0.8)',
+        'rgba(250,250,250,0.5)'
+    ];
+
+    var scale = 1;
+    var echartData = {{ tagChartData | safe }};
+
+    var rich = {
+        value: {
+            color: "#fff",
+            fontSize: 12 * scale,
+            fontWeight: 'bold',
+            padding: [4, 0],
+            align: 'center'
+        },
+        total: {
+            color: "#49dff0",
+            fontSize: 42 * scale,
+            fontWeight: 'bolder',
+            align: 'center',
+            textShadowBlur: 10,
+            textShadowColor: 'rgba(73,223,240,0.5)'
+        },
+        label: {
+            color: "#fff",
+            align: 'center',
+            fontSize: 14 * scale,
+            padding: [8, 0]
+        },
+        percent: {
+            color: '#3feed4',
+            fontSize: 16 * scale,
+            fontWeight: 'bold',
+            align: 'center'
+        },
+        hr: {
+            borderColor: 'rgba(127, 127, 213, 0.4)',
+            width: '80%',
+            borderWidth: 1,
+            height: 0,
+        }
+    };
+
+    option = {
+        backgroundColor: '#031f2d',
+        title: {
+            text: '电影分类统计',
+            left: '10%',
+            top: 10,
+            textStyle: {
+                color: '#fff',
+                fontSize: 20 * scale,
+                fontWeight: 'bold'
+            }
+        },
+        tooltip: {
+            trigger: 'item',
+            formatter: '{b}: {c} ({d}%)',
+            backgroundColor: 'rgba(0,0,0,0.8)',
+            borderColor: '#0b5263',
+            textStyle: {
+                color: '#fff',
+                fontSize: 14 * scale
+            }
+        },
+
+        series: [{
+            name: '电影分类',
+            type: 'pie',
+            radius: ['45%', '65%'],
+            hoverOffset: 8,
+            itemStyle: {
+                borderColor: '#031f2d',
+                borderWidth: 3
+            },
+            color: colorList,
+            label: {
+                formatter: params => {
+                    const total = echartData.reduce((sum, item) => sum + item.value, 0);
+                    const percent = ((params.value / total) * 100).toFixed(1);
+                    return [
+                        `{label|${params.name}}`,
+                        '{hr|}',
+                        `{value|${params.value}}`,
+                        `{percent|${percent}%}`
+                    ].join('\n');
+                },
+                rich: rich,
+                position: 'outside',
+                alignTo: 'labelLine',
+                bleedMargin: 10
+            },
+            labelLine: {
+                show: true,
+                length: 20,
+                length2: 30,
+                smooth: true,
+                lineStyle: {
+                    color: 'rgba(127, 127, 213, 0.4)',
+                    width: 2
+                }
+            },
+            data: echartData,
+            animationType: 'scale',
+            animationEasing: 'elasticOut',
+            animationDelay: function (idx) {
+                return Math.random() * 200;
+            }
+        }]
+    };
+    option && myChart.setOption(option);
+</script>
+
+<script>
+    var chartDom = document.getElementById('mainB');
+    var myChart = echarts.init(chartDom);
+    var option;
+    var scale = 1;
+    var themeColors = {
+        barStart: '#00FFE3',
+        barEnd: '#4693EC',
+        line: '#FF9F43',
+        axisText: '#A0D7E7',
+        bg: '#0f375f',
+        tooltipBg: 'rgba(0,32,51,0.95)'
+    };
+option = {
+     title: {
+            text: '总票房TOP10',
+            textStyle: {
+                color: '#fff',
+                fontSize: 22 * scale,
+                fontWeight: 'bold',
+                fontFamily: 'Microsoft YaHei'
+            },
+            top: 20,
+            left: 'center'
+        },
+    backgroundColor: '#0f375f',
+    grid: {
+        top: "25%",
+        bottom: "10%"//也可设置left和right设置距离来控制图表的大小
+    },
+    tooltip: {
+            trigger: 'axis',
+            backgroundColor: 'rgba(0,32,51,0.9)',
+            borderColor: '#01FCE3',
+            borderWidth: 1,
+            padding: [10, 15],
+            textStyle: {
+                color: '#fff',
+                fontSize: 14 * scale
+            },
+            axisPointer: {
+                type: 'shadow',
+                label: {
+                    backgroundColor: '#01FCE3',
+                    color: '#003046'
+                }
+            },
+            formatter: function(params) {
+                var res = '<div style="margin-bottom:5px">' + params[0].name + '</div>';
+                params.forEach(function(item) {
+                    var unit = item.seriesName === '票房' ? '万' : '%';
+                    var value = item.seriesName === '票房' ?
+                        item.value.toLocaleString() : item.value;
+                    res += '<div style="display:flex;align-items:center;">';
+                    res += '<span style="display:inline-block;width:10px;height:10px;border-radius:50%;background:'
+                         + item.color + ';margin-right:8px;"></span>';
+                    res += '<span style="flex:1">' + item.seriesName + '：</span>';
+                    res += '<span style="font-weight:bold;color:' + item.color + '">'
+                         + value + unit + '</span></div>';
+                });
+                return res;
+            }
+        },
+    legend: {
+        data: ["票房", "评分"],
+        top: "15%",
+        textStyle: {
+            color: "#ffffff"
+        }
+    },
+    xAxis: {
+            data: {{ topName | safe }},
+            axisLine: {
+                lineStyle: {
+                    color: themeColors.axisText,
+                    width: 2
+                }
+            },
+            axisTick: { show: false },
+            axisLabel: {
+                color: themeColors.axisText,
+                fontSize: 12,
+                rotate: 30,
+                margin: 10,
+                formatter: function(value) {
+                    return value.length > 6 ? value.substr(0,6)+'...' : value;
+                }
+            }
+        },
+        yAxis: [
+            {
+                type: 'value',
+                name: '票房',
+                nameTextStyle: {
+                    color: themeColors.axisText,
+                    fontSize: 12,
+                    padding: [0, 0, 10, 0]
+                },
+                splitLine: {
+                    lineStyle: {
+                        color: 'rgba(160,215,231,0.15)',
+                        type: 'dashed'
+                    }
+                },
+                axisLine: {
+                    lineStyle: {
+                        color: themeColors.axisText
+                    }
+                },
+                axisLabel: {
+                    color: themeColors.axisText,
+                    fontSize: 12
+                }
+            },
+            {
+                type: 'value',
+                name: '评分 (%)',
+                position: 'right',
+                nameTextStyle: {
+                    color: themeColors.axisText,
+                    fontSize: 12,
+                    padding: [0, 0, 10, 10]
+                },
+                splitLine: { show: false },
+                axisLine: {
+                    lineStyle: {
+                        color: themeColors.axisText
+                    }
+                },
+                axisLabel: {
+                    color: themeColors.axisText,
+                    formatter: '{value}%'
+                }
+            }
+        ],
+    series: [{
+            name: "评分",
+            type: "line",
+            yAxisIndex: 1, //使用的 y 轴的 index，在单个图表实例中存在多个 y轴的时候有用
+            smooth: true, //平滑曲线显示
+            showAllSymbol: true, //显示所有图形。
+            symbol: "circle", //标记的图形为实心圆
+            symbolSize: 10, //标记的大小
+            itemStyle: {
+                //折线拐点标志的样式
+                color: "#058cff"
+            },
+            lineStyle: {
+                color: "#058cff"
+            },
+            areaStyle:{
+                color: "rgba(5,140,255, 0.2)"
+            },
+            data: {{ topRate | safe }}
+        },
+        {
+            name: "票房",
+            type: "bar",
+            barWidth: 15,
+            itemStyle: {
+                normal: {
+                    color: new echarts.graphic.LinearGradient(0, 0, 0, 1, [{
+                            offset: 0,
+                            color: "#00FFE3"
+                        },
+                        {
+                            offset: 1,
+                            color: "#4693EC"
+                        }
+                    ])
+                }
+            },
+            data: {{ topAllTicket | safe }}
+        }
+    ]
+};
+    option && myChart.setOption(option);
+
+</script>
+
+<script>
+    var chartDom = document.getElementById('mainE');
+    var myChart = echarts.init(chartDom);
+
+    // 统一配色方案（与柱状图、饼图保持一致）
+    const unifiedColors = {
+        gradientPurple: new echarts.graphic.LinearGradient(0, 0, 1, 0, [
+            { offset: 0, color: '#AFA3F5' },  // 饼图紫色
+            { offset: 1, color: '#6F81DA' }   // 饼图蓝紫色
+        ]),
+        gradientGreen: new echarts.graphic.LinearGradient(0, 0, 1, 0, [
+            { offset: 0, color: '#00D488' },  // 饼图绿色
+            { offset: 1, color: '#3FEED4' }   // 饼图青色
+        ]),
+        gradientBlue: new echarts.graphic.LinearGradient(0, 0, 1, 0, [
+            { offset: 0, color: '#4693EC' },  // 柱状图蓝色
+            { offset: 1, color: '#3BAFFF' }   // 饼图蓝色
+        ]),
+        lineOrange: '#FF9F43',                // 折线图橙色
+        background: '#031f2d',                // 柱状图背景色
+        textLight: '#A0D7E7'                  // 坐标轴文字色
+    };
+    var option = {
+        backgroundColor: unifiedColors.background,
+        title: {
+            text: '评分分布分析',
+            left: 'center',
+            top: 20,
+            textStyle: {
+                color: '#fff',
+                fontSize: 18,
+                fontWeight: 'bold'
+            }
+        },
+        tooltip: {
+            trigger: 'item',
+            backgroundColor: 'rgba(0,32,51,0.9)',
+            borderColor: unifiedColors.gradientBlue,
+            borderWidth: 1,
+            formatter: ({ data }) => `
+                <div style="color:${unifiedColors.textLight}">${data.name}</div>
+                <div style="margin-top:2px">
+                    <span style="color:#7F95B0">占比：</span>
+                    <span style="color:${unifiedColors.lineOrange};font-weight:bold">${data.value}%</span>
+                </div>
+            `,
+            textStyle: {
+                color: '#fff',
+                fontSize: 14
+            }
+        },
+        legend: {
+            data: ['A', 'B', 'C', 'D', 'E'],
+            bottom: 20,
+            itemWidth: 14,
+            itemHeight: 8,
+            textStyle: {
+                color: unifiedColors.textLight,
+                fontSize: 12
+            },
+            icon: 'circle'
+        },
+        color: [
+            unifiedColors.gradientPurple,
+            unifiedColors.gradientGreen,
+            unifiedColors.gradientBlue,
+            '#F1BB4C',  // 饼图黄色
+            '#3FEED4'   // 饼图青色
+        ],
+        series: [
+            {
+                type: 'funnel',
+                width: '75%',
+                height: '65%',
+                left: 'center',
+                top: 60,
+                sort: 'descending',
+                gap: 2,
+                label: {
+                    show: true,
+                    position: 'right',
+                    formatter: '{b}',
+                    color: '#fff',
+                    fontSize: 8,
+                    backgroundColor: 'rgba(160,215,231,0.15)',
+                    borderColor: unifiedColors.textLight,
+                    borderWidth: 1,
+                    borderRadius: 4,
+                    padding: [8, 15],
+                    shadowBlur: 8,
+                    shadowColor: 'rgba(160,215,231,0.3)'
+                },
+                labelLine: {
+                    length: 30,
+                    lineStyle: {
+                        color: unifiedColors.textLight,
+                        width: 1,
+                        type: 'dashed'
+                    }
+                },
+                itemStyle: {
+                    borderColor: unifiedColors.background,
+                    borderWidth: 3,
+                    shadowBlur: 10,
+                    shadowColor: 'rgba(0,0,0,0.3)'
+                },
+                emphasis: {
+                    label: {
+                        fontWeight: 'bold',
+                        color: unifiedColors.lineOrange
+                    },
+                    itemStyle: {
+                        opacity: 0.8
+                    }
+                },
+                data: {{ rateCountData | safe }},
+                animationType: 'expansion'
+            },
+            {
+                type: 'funnel',
+                width: '75%',
+                height: '65%',
+                left: 'center',
+                top: 60,
+                sort: 'descending',
+                gap: 2,
+                label: {
+                    show: true,
+                    position: 'inside',
+                    formatter: '{c}%',
+                    color: '#fff',
+                    fontSize: 16,
+                    fontWeight: 'bold',
+                    textShadowBlur: 8,
+                    textShadowColor: 'rgba(0,0,0,0.8)'
+                },
+                itemStyle: {
+                    borderColor: unifiedColors.background,
+                    borderWidth: 3,
+                    opacity: 0.9
+                },
+                data: {{ rateCountData | safe }}
+            }
+        ]
+    };
+     option && myChart.setOption(option);
+</script>
+
+<script>
+    var chartDom = document.getElementById('mainC');
+    var myChart = echarts.init(chartDom);
+        // 响应式调整
+    function resizeChart() {
+        myChart.resize();
+    }
+    window.addEventListener('resize', resizeChart);
+
+    option = {
+    backgroundColor: {
+            type: 'radial',
+            x: 0.5,
+            y: 0.5,
+            r: 0.5,
+            colorStops: [
+                { offset: 0, color: '#080b30' },
+                { offset: 1, color: '#031f2d'}
+            ]
+        },
+    title: {
+            text: '种类最高票房',
+            textStyle: {
+                color: '#fff',
+                fontSize: 20,
+                fontWeight: 'bold',
+                fontFamily: 'Arial',
+                textShadow: '0 0 10px rgba(108, 80, 243, 0.7)'
+            },
+            top: '3%',
+            left: '25%',
+
+        },
+    tooltip: {
+            trigger: 'axis',
+            backgroundColor: 'rgba(0,0,0,0.7)',
+            borderColor: 'rgba(108, 80, 243, 0.8)',
+            borderWidth: 1,
+            textStyle: {
+                color: '#fff',
+                fontSize: 14
+            },
+            axisPointer: {
+                type: 'shadow',
+                shadowStyle: {
+                    color: 'rgba(108, 80, 243, 0.2)'
+                },
+                label: {
+                    backgroundColor: '#6c50f3'
+                }
+            },
+            formatter: function(params) {
+                let result = params[0].name + '<br/>';
+                params.forEach(item => {
+                    result += `<span style="display:inline-block;margin-right:5px;border-radius:10px;width:10px;height:10px;background-color:${item.color}"></span>`;
+                    result += `${item.seriesName}: <strong>${item.value}</strong><br/>`;
+                });
+                return result;
+            }
+        },
+        legend: {
+            data: ['总票房', '首周票房'],
+            right: '5%',
+            top: '5%',
+            textStyle: {
+                color: '#fff',
+                fontSize: 12
+            },
+            itemWidth: 12,
+            itemHeight: 12,
+            itemGap: 20
+        },
+    grid: {
+            top: '20%',
+            left: '5%',
+            right: '5%',
+            bottom: '15%',
+            containLabel: true
+        },
+    xAxis: {
+            type: 'category',
+            axisLine: {
+                show: true,
+                lineStyle: {
+                    color: 'rgba(255,255,255,0.3)'
+                }
+            },
+            axisLabel: {
+                color: 'rgba(255,255,255,0.8)',
+                fontSize: 12,
+                interval: 0,
+                rotate: 30
+            },
+            axisTick: {
+                show: false
+            },
+            splitLine: {
+                show: false
+            },
+            boundaryGap: false,
+            data: {{ tagName | safe }},
+        },
+
+    yAxis: {
+            type: 'value',
+            min: 0,
+            splitNumber: 5,
+            splitLine: {
+                show: true,
+                lineStyle: {
+                    color: 'rgba(255,255,255,0.1)',
+                    type: 'dashed'
+                }
+            },
+            axisLine: {
+                show: false
+            },
+            axisLabel: {
+                show: true,
+                color: 'rgba(255,255,255,0.6)',
+                fontSize: 12
+            },
+            axisTick: {
+                show: false
+            }
+        },
+        series: [
+            {
+                name: '总票房',
+                type: 'line',
+                smooth: true,
+                showSymbol: true,
+                symbol: 'circle',
+                symbolSize: 12,
+                lineStyle: {
+                    width: 4,
+                    color: new echarts.graphic.LinearGradient(0, 0, 1, 0, [
+                        { offset: 0, color: '#6c50f3' },
+                        { offset: 1, color: '#a86ef5' }
+                    ]),
+                    shadowColor: 'rgba(108, 80, 243, 0.5)',
+                    shadowBlur: 10,
+                    shadowOffsetY: 5
+                },
+                label: {
+                    position: 'top',
+                    color: '#fff',
+                    fontSize: 12,
+                    fontWeight: 'bold',
+                    formatter: function(params) {
+                        return params.value.toLocaleString();
+                    }
+                },
+                itemStyle: {
+                    color: '#6c50f3',
+                    borderColor: '#fff',
+                    borderWidth: 2,
+                    shadowColor: 'rgba(0, 0, 0, 0.3)',
+                    shadowBlur: 5,
+                    shadowOffsetY: 3
+                },
+                areaStyle: {
+                    color: new echarts.graphic.LinearGradient(0, 0, 0, 1, [
+                        { offset: 0, color: 'rgba(108, 80, 243, 0.5)' },
+                        { offset: 1, color: 'rgba(108, 80, 243, 0.1)' }
+                    ])
+                },
+                animationEasing: 'elasticOut',
+                animationDelay: function(idx) {
+                    return idx * 100;
+                },
+                data: {{ total | safe }}
+            },
+            {
+                name: '首周票房',
+                type: 'line',
+                smooth: true,
+                showSymbol: true,
+                symbol: 'diamond',
+                symbolSize: 12,
+                lineStyle: {
+                    width: 4,
+                    color: new echarts.graphic.LinearGradient(0, 0, 1, 0, [
+                        { offset: 0, color: '#00ca95' },
+                        { offset: 1, color: '#00e6a8' }
+                    ]),
+                    shadowColor: 'rgba(0, 202, 149, 0.5)',
+                    shadowBlur: 10,
+                    shadowOffsetY: 5
+                },
+                label: {
+                    position: 'top',
+                    color: '#fff',
+                    fontSize: 12,
+                    fontWeight: 'bold',
+                    formatter: function(params) {
+                        return params.value.toLocaleString();
+                    }
+                },
+                itemStyle: {
+                    color: '#00ca95',
+                    borderColor: '#fff',
+                    borderWidth: 2,
+                    shadowColor: 'rgba(0, 0, 0, 0.3)',
+                    shadowBlur: 5,
+                    shadowOffsetY: 3
+                },
+                areaStyle: {
+                    color: new echarts.graphic.LinearGradient(0, 0, 0, 1, [
+                        { offset: 0, color: 'rgba(0, 202, 149, 0.5)' },
+                        { offset: 1, color: 'rgba(0, 202, 149, 0.1)' }
+                    ])
+                },
+                animationEasing: 'elasticOut',
+                animationDelay: function(idx) {
+                    return idx * 100 + 200;
+                },
+                data: {{ firstWeek | safe }}
+            }
+        ],
+};
+    option && myChart.setOption(option);
+</script>
+
+<script>
+    var chartDom = document.getElementById('mainD');
+    var myChart = echarts.init(chartDom);
+
+    // 数据预处理（过滤0值并降序排序）
+    const processData = () => {
+        const names = {{ countryName | safe }};
+        const counts = {{ countryCount | safe }};
+        return names
+            .map((name, index) => ({ name, value: counts[index] }))
+            .filter(item => item.value > 0)
+            .sort((a, b) => b.value - a.value);
+    };
+
+    const chartData = processData();
+
+    // 统一视觉主题
+    var theme = {
+        bg: '#031f2d',
+        gradients: [
+            new echarts.graphic.LinearGradient(1, 0, 0, 0, [
+                { offset: 0, color: '#AFA3F5' },  // 紫色渐变
+                { offset: 1, color: '#6F81DA' }
+            ]),
+            new echarts.graphic.LinearGradient(1, 0, 0, 0, [
+                { offset: 0, color: '#00D488' },  // 绿色渐变
+                { offset: 1, color: '#3FEED4' }
+            ]),
+            new echarts.graphic.LinearGradient(1, 0, 0, 0, [
+                { offset: 0, color: '#3BAFFF' },  // 蓝色渐变
+                { offset: 1, color: '#4693EC' }
+            ])
+        ],
+        text: '#A0D7E7',
+        highlight: '#FF9F43'
+    };
+
+    option = {
+        title: {
+        text: '国家电影数量',
+        textStyle: {
+            align: 'center',
+            color: '#fff',
+            fontSize: 20,
+        },
+        top: '5%',
+        left: 'center',
+    },
+        backgroundColor: theme.bg,
+        grid: {
+            left: '12%',
+            right: '12%',
+            top: '18%',
+            bottom: '12%',
+            containLabel: true
+        },
+        xAxis: { show: false },
+        yAxis: {
+            type: 'category',
+            inverse: true,
+            axisLine: { show: false },
+            axisTick: { show: false },
+            axisLabel: {
+                color: theme.text,
+                fontSize: 14,
+                margin: 20
+            },
+            data: chartData.map(d => d.name)
+        },
+        tooltip: {
+            trigger: 'item',
+            backgroundColor: 'rgba(0,32,51,0.9)',
+            borderColor: theme.gradients[0],
+            borderWidth: 1,
+            formatter: ({ data }) => `
+                <div style="color:${theme.text}">${data.name}</div>
+                <div style="margin-top:8px">
+                    <span style="color:#7F95B0">数量：</span>
+                    <span style="color:${theme.highlight}">${data.value}</span>
+                </div>
+            `
+        },
+        series: [{
+            type: 'bar',
+            data: chartData,
+            barWidth: 16,
+            itemStyle: {
+                color: (params) => theme.gradients[params.dataIndex % 3],
+                borderRadius: [0, 8, 8, 0],
+                shadowBlur: 8,
+                shadowColor: 'rgba(160,215,231,0.3)'
+            },
+            emphasis: {
+                itemStyle: {
+                    shadowColor: theme.highlight,
+                    shadowBlur: 12
+                }
+            },
+            label: {
+                show: true,
+                position: 'right',
+                color: theme.text,
+                fontSize: 14,
+                fontWeight: 'bold',
+                formatter: ({ value }) => value.toLocaleString()
+            },
+            animationDelay: (idx) => idx * 50
+        }],
+        animationEasing: 'elasticOut'
+    };
+
+    option && myChart.setOption(option);
+    window.addEventListener('resize', () => myChart.resize());
+</script>
+</body>
+</html>
+

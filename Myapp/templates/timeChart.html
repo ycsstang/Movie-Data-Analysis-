@@ -1,0 +1,1091 @@
+<!doctype html>
+<html lang="en-US" dir="ltr">
+
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+    <title>时间分析</title>
+    <link rel="apple-touch-icon" sizes="180x180" href="/static/static/img/favicons/apple-touch-icon.png">
+    <link rel="icon" type="image/png" sizes="32x32" href="/static/static/img/favicons/favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="/static/static/img/favicons/favicon-16x16.png">
+    <link rel="shortcut icon" type="image/x-icon" href="/static/static/img/favicons/favicon.ico">
+    <link rel="manifest" href="/static/static/img/favicons/manifest.json">
+    <meta name="msapplication-TileImage" content="static/img/favicons/mstile-150x150.png">
+    <meta name="theme-color" content="#ffffff">
+    <link rel="preconnect" href="https://fonts.gstatic.com/">
+    <link href="/static/static/css/css2.css" rel="stylesheet">
+    <link href="/static/static/css/css21.css" rel="stylesheet">
+    <link href="/static/static/css/phoenix.min.css" rel="stylesheet" id="style-default">
+    <link href="#" rel="stylesheet" id="user-style-default">
+    <style>
+      body {
+        opacity: 0;
+      }
+    </style>
+  </head>
+
+  <body>
+    <main class="main" id="top">
+      <div class="container-fluid px-0">
+        <nav class="navbar navbar-light navbar-vertical navbar-vibrant navbar-expand-lg">
+          <div class="collapse navbar-collapse" id="navbarVerticalCollapse">
+            <div class="navbar-vertical-content scrollbar">
+              <ul class="navbar-nav flex-column" id="navbarVerticalNav">
+{#                <li class="nav-item"><a class="nav-link active" href="">#}
+{#                    <div class="d-flex align-items-center"><span class="nav-link-icon"><span data-feather="cast"></span></span><span class="nav-link-text">类别分析</span></div>#}
+{#                  </a></li>#}
+
+{#                  数据分析#}
+                <li class="nav-item">
+                  <p class="navbar-vertical-label">数据分析</p>
+
+                   <a class="nav-link " href="/myApp/catChart">
+                    <div class="d-flex align-items-center"><span class="nav-link-icon"><span data-feather="layers"></span></span><span class="nav-link-text">类别分析</span></div>
+                    </a>
+                    <a class="nav-link " href="/myApp/countryChart">
+                    <div class="d-flex align-items-center"><span class="nav-link-icon"><span data-feather="cast"></span></span><span class="nav-link-text">国家分析</span></div>
+                    </a>
+                    <a class="nav-link " href="/myApp/timeChart">
+                   <div class="d-flex align-items-center"><span class="nav-link-icon"><span data-feather="watch"></span></span><span class="nav-link-text">时间分析</span></div>
+                    </a>
+
+{#                    <a class="nav-link" href="starter.html" role="button" data-bs-toggle="" aria-expanded="false">#}
+{#                    <div class="d-flex align-items-center"><span class="nav-link-icon"><span data-feather="flag"></span></span><span class="nav-link-text">Starter</span></div>#}
+{#                  </a><a class="nav-link dropdown-indicator" href="#errors" role="button" data-bs-toggle="collapse" aria-expanded="false" aria-controls="errors">#}
+{#                    <div class="d-flex align-items-center">#}
+{#                      <div class="dropdown-indicator-icon d-flex flex-center"><span class="fas fa-caret-right fs-0"></span></div><span class="nav-link-icon"><span data-feather="alert-triangle"></span></span><span class="nav-link-text">Errors</span>#}
+{#                    </div>#}
+{#                  </a>#}
+{#                  <ul class="nav collapse parent" id="errors">#}
+{#                    <li class="nav-item"><a class="nav-link" href="404.html" data-bs-toggle="" aria-expanded="false">#}
+{#                        <div class="d-flex align-items-center"><span class="nav-link-text">404</span></div>#}
+{#                      </a></li>#}
+{#                    <li class="nav-item"><a class="nav-link" href="500.html" data-bs-toggle="" aria-expanded="false">#}
+{#                        <div class="d-flex align-items-center"><span class="nav-link-text">500</span></div>#}
+{#                      </a></li>#}
+{#                  </ul><a class="nav-link dropdown-indicator" href="#authentication" role="button" data-bs-toggle="collapse" aria-expanded="false" aria-controls="authentication">#}
+{#                    <div class="d-flex align-items-center">#}
+{#                      <div class="dropdown-indicator-icon d-flex flex-center"><span class="fas fa-caret-right fs-0"></span></div><span class="nav-link-icon"><span data-feather="lock"></span></span><span class="nav-link-text">Authentication</span>#}
+{#                    </div>#}
+{#                  </a>#}
+{#                  <ul class="nav collapse parent" id="authentication">#}
+{#                    <li class="nav-item"><a class="nav-link" href="login.html" data-bs-toggle="" aria-expanded="false">#}
+{#                        <div class="d-flex align-items-center"><span class="nav-link-text">Sign in</span></div>#}
+{#                      </a></li>#}
+{#                    <li class="nav-item"><a class="nav-link" href="register.html" data-bs-toggle="" aria-expanded="false">#}
+{#                        <div class="d-flex align-items-center"><span class="nav-link-text">Sign up</span></div>#}
+{#                      </a></li>#}
+{#                    <li class="nav-item"><a class="nav-link" href="sign-out.html" data-bs-toggle="" aria-expanded="false">#}
+{#                        <div class="d-flex align-items-center"><span class="nav-link-text">Sign out</span></div>#}
+{#                      </a></li>#}
+{#                    <li class="nav-item"><a class="nav-link" href="forgot-password.html" data-bs-toggle="" aria-expanded="false">#}
+{#                        <div class="d-flex align-items-center"><span class="nav-link-text">Forgot password</span></div>#}
+{#                      </a></li>#}
+{#                    <li class="nav-item"><a class="nav-link" href="reset-password.html" data-bs-toggle="" aria-expanded="false">#}
+{#                        <div class="d-flex align-items-center"><span class="nav-link-text">Reset password</span></div>#}
+{#                      </a></li>#}
+{#                    <li class="nav-item"><a class="nav-link" href="lock-screen.html" data-bs-toggle="" aria-expanded="false">#}
+{#                        <div class="d-flex align-items-center"><span class="nav-link-text">Lock screen</span></div>#}
+{#                      </a></li>#}
+{#                  </ul>#}
+                </li>
+                
+                <li class="nav-item">
+                  <p class="navbar-vertical-label">数据总览</p>
+
+                    <a class="nav-link " href="/myApp/totalMovie">
+                    <div class="d-flex align-items-center"><span class="nav-link-icon"><span data-feather="flag"></span></span><span class="nav-link-text">数据总览</span></div>
+                    </a>
+                </li>  
+                <li class="nav-item">
+                  <p class="navbar-vertical-label">个人信息</p>
+
+                    <a class="nav-link " href="">
+                    <div class="d-flex align-items-center"><span class="nav-link-icon"><span data-feather="user"></span></span><span class="nav-link-text">个人信息修改</span></div>
+                    </a>
+                    <a class="nav-link " href="">
+                    <div class="d-flex align-items-center"><span class="nav-link-icon"><span data-feather="heart"></span></span><span class="nav-link-text">个人收藏</span></div>
+                    </a>
+                </li>
+
+
+                <li class="nav-item">
+                  <p class="navbar-vertical-label">预测</p>
+
+                    <a class="nav-link " href="">
+                    <div class="d-flex align-items-center"><span class="nav-link-icon"><span data-feather="flag"></span></span><span class="nav-link-text">票房预测</span></div>
+                    </a>
+                </li>
+
+                <li class="nav-item">
+                  <p class="navbar-vertical-label">推荐</p>
+
+                    <a class="nav-link " href="">
+                    <div class="d-flex align-items-center"><span class="nav-link-icon"><span data-feather="star"></span></span><span class="nav-link-text">电影推荐</span></div>
+                    </a>
+                </li>
+                  
+                <li class="nav-item">
+                  <p class="navbar-vertical-label">数据词云图</p>
+
+                    <a class="nav-link " href="">
+                    <div class="d-flex align-items-center"><span class="nav-link-icon"><span data-feather="cloud"></span></span><span class="nav-link-text">词云图</span></div>
+                    </a>
+                </li>  
+                  
+              </ul>
+            </div>
+            <div class="navbar-vertical-footer"><a class="btn btn-link border-0 fw-semi-bold d-flex ps-0" href="#!"><span class="navbar-vertical-footer-icon" data-feather="log-out"></span><span>Settings</span></a></div>
+          </div>
+        </nav>
+        <nav class="navbar navbar-light navbar-vertical navbar-vibrant navbar-expand-lg">
+          <div class="collapse navbar-collapse" id="navbarVerticalCollapse">
+            <div class="navbar-vertical-content scrollbar">
+              <ul class="navbar-nav flex-column" id="navbarVerticalNav">
+{#                <li class="nav-item"><a class="nav-link active" href="">#}
+{#                    <div class="d-flex align-items-center"><span class="nav-link-icon"><span data-feather="cast"></span></span><span class="nav-link-text">类别分析</span></div>#}
+{#                  </a></li>#}
+
+{#                  数据分析#}
+                <li class="nav-item">
+                  <p class="navbar-vertical-label">数据分析</p>
+
+                   <a class="nav-link " href="/myApp/catChart">
+                    <div class="d-flex align-items-center"><span class="nav-link-icon"><span data-feather="layers"></span></span><span class="nav-link-text">类别分析</span></div>
+                    </a>
+                    <a class="nav-link " href="/myApp/countryChart">
+                    <div class="d-flex align-items-center"><span class="nav-link-icon"><span data-feather="cast"></span></span><span class="nav-link-text">国家分析</span></div>
+                    </a>
+                    <a class="nav-link " href="/myApp/timeChart">
+                   <div class="d-flex align-items-center"><span class="nav-link-icon"><span data-feather="watch"></span></span><span class="nav-link-text">时间分析</span></div>
+                    </a>
+
+{#                    <a class="nav-link" href="starter.html" role="button" data-bs-toggle="" aria-expanded="false">#}
+{#                    <div class="d-flex align-items-center"><span class="nav-link-icon"><span data-feather="flag"></span></span><span class="nav-link-text">Starter</span></div>#}
+{#                  </a><a class="nav-link dropdown-indicator" href="#errors" role="button" data-bs-toggle="collapse" aria-expanded="false" aria-controls="errors">#}
+{#                    <div class="d-flex align-items-center">#}
+{#                      <div class="dropdown-indicator-icon d-flex flex-center"><span class="fas fa-caret-right fs-0"></span></div><span class="nav-link-icon"><span data-feather="alert-triangle"></span></span><span class="nav-link-text">Errors</span>#}
+{#                    </div>#}
+{#                  </a>#}
+{#                  <ul class="nav collapse parent" id="errors">#}
+{#                    <li class="nav-item"><a class="nav-link" href="404.html" data-bs-toggle="" aria-expanded="false">#}
+{#                        <div class="d-flex align-items-center"><span class="nav-link-text">404</span></div>#}
+{#                      </a></li>#}
+{#                    <li class="nav-item"><a class="nav-link" href="500.html" data-bs-toggle="" aria-expanded="false">#}
+{#                        <div class="d-flex align-items-center"><span class="nav-link-text">500</span></div>#}
+{#                      </a></li>#}
+{#                  </ul><a class="nav-link dropdown-indicator" href="#authentication" role="button" data-bs-toggle="collapse" aria-expanded="false" aria-controls="authentication">#}
+{#                    <div class="d-flex align-items-center">#}
+{#                      <div class="dropdown-indicator-icon d-flex flex-center"><span class="fas fa-caret-right fs-0"></span></div><span class="nav-link-icon"><span data-feather="lock"></span></span><span class="nav-link-text">Authentication</span>#}
+{#                    </div>#}
+{#                  </a>#}
+{#                  <ul class="nav collapse parent" id="authentication">#}
+{#                    <li class="nav-item"><a class="nav-link" href="login.html" data-bs-toggle="" aria-expanded="false">#}
+{#                        <div class="d-flex align-items-center"><span class="nav-link-text">Sign in</span></div>#}
+{#                      </a></li>#}
+{#                    <li class="nav-item"><a class="nav-link" href="register.html" data-bs-toggle="" aria-expanded="false">#}
+{#                        <div class="d-flex align-items-center"><span class="nav-link-text">Sign up</span></div>#}
+{#                      </a></li>#}
+{#                    <li class="nav-item"><a class="nav-link" href="sign-out.html" data-bs-toggle="" aria-expanded="false">#}
+{#                        <div class="d-flex align-items-center"><span class="nav-link-text">Sign out</span></div>#}
+{#                      </a></li>#}
+{#                    <li class="nav-item"><a class="nav-link" href="forgot-password.html" data-bs-toggle="" aria-expanded="false">#}
+{#                        <div class="d-flex align-items-center"><span class="nav-link-text">Forgot password</span></div>#}
+{#                      </a></li>#}
+{#                    <li class="nav-item"><a class="nav-link" href="reset-password.html" data-bs-toggle="" aria-expanded="false">#}
+{#                        <div class="d-flex align-items-center"><span class="nav-link-text">Reset password</span></div>#}
+{#                      </a></li>#}
+{#                    <li class="nav-item"><a class="nav-link" href="lock-screen.html" data-bs-toggle="" aria-expanded="false">#}
+{#                        <div class="d-flex align-items-center"><span class="nav-link-text">Lock screen</span></div>#}
+{#                      </a></li>#}
+{#                  </ul>#}
+                </li>
+
+                <li class="nav-item">
+                  <p class="navbar-vertical-label">数据总览</p>
+
+                    <a class="nav-link " href="/myApp/totalMovies">
+                    <div class="d-flex align-items-center"><span class="nav-link-icon"><span data-feather="flag"></span></span><span class="nav-link-text">数据总览</span></div>
+                    </a>
+                </li>
+                <li class="nav-item">
+                  <p class="navbar-vertical-label">个人信息</p>
+
+                    <a class="nav-link " href="">
+                    <div class="d-flex align-items-center"><span class="nav-link-icon"><span data-feather="user"></span></span><span class="nav-link-text">个人信息修改</span></div>
+                    </a>
+                    <a class="nav-link " href="">
+                    <div class="d-flex align-items-center"><span class="nav-link-icon"><span data-feather="heart"></span></span><span class="nav-link-text">个人收藏</span></div>
+                    </a>
+                </li>
+
+
+                <li class="nav-item">
+                  <p class="navbar-vertical-label">预测</p>
+
+                    <a class="nav-link " href="">
+                    <div class="d-flex align-items-center"><span class="nav-link-icon"><span data-feather="flag"></span></span><span class="nav-link-text">票房预测</span></div>
+                    </a>
+                </li>
+
+                <li class="nav-item">
+                  <p class="navbar-vertical-label">推荐</p>
+
+                    <a class="nav-link " href="">
+                    <div class="d-flex align-items-center"><span class="nav-link-icon"><span data-feather="star"></span></span><span class="nav-link-text">电影推荐</span></div>
+                    </a>
+                </li>
+
+                <li class="nav-item">
+                  <p class="navbar-vertical-label">数据词云图</p>
+
+                    <a class="nav-link " href="">
+                    <div class="d-flex align-items-center"><span class="nav-link-icon"><span data-feather="cloud"></span></span><span class="nav-link-text">词云图</span></div>
+                    </a>
+                </li>
+
+              </ul>
+            </div>
+
+
+            <div class="navbar-vertical-footer"><a class="btn btn-link border-0 fw-semi-bold d-flex ps-0" href="#!"><span class="navbar-vertical-footer-icon" data-feather="log-out"></span><span>Settings</span></a></div>
+          </div>
+        </nav>
+        <nav class="navbar navbar-light navbar-top navbar-expand">
+          <div class="navbar-logo"><button class="btn navbar-toggler navbar-toggler-humburger-icon" type="button" data-bs-toggle="collapse" data-bs-target="#navbarVerticalCollapse" aria-controls="navbarVerticalCollapse" aria-expanded="false" aria-label="Toggle Navigation"><span class="navbar-toggle-icon"><span class="toggle-line"></span></span></button> <a class="navbar-brand me-1 me-sm-3" href="">
+              <div class="d-flex align-items-center">
+                <div class="d-flex align-items-center"><img src="/static/static/picture/logo.png" alt="phoenix" width="32">
+                  <p class="logo-text ms-2 d-none d-sm-block">电影数据分析</p>
+                </div>
+              </div>
+            </a></div>
+          <div class="collapse navbar-collapse">
+
+            <ul class="navbar-nav navbar-nav-icons ms-auto flex-row">
+
+              <li class="nav-item dropdown"><a class="nav-link lh-1 px-0 ms-5" id="navbarDropdownUser" href="#" role="button" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                  <div class="avatar avatar-l"><img class="rounded-circle" src="/static/static/picture/57.png" alt=""></div>
+                </a>
+                <div class="dropdown-menu dropdown-menu-end py-0 dropdown-profile shadow border border-300" aria-labelledby="navbarDropdownUser">
+                  <div class="card bg-white position-relative border-0">
+                    <div class="card-body p-0 overflow-auto scrollbar" style="height: 18rem;">
+                      <div class="text-center pt-4 pb-3">
+                        <div class="avatar avatar-xl"><img class="rounded-circle" src="/static/static/picture/57.png" alt=""></div>
+                        <h6 class="mt-2">{{ userInfo.username }}</h6>
+                      </div>
+                      <div class="mb-3 mx-3"><input class="form-control form-control-sm" id="exampleFormControlInput1" placeholder="Update your status"></div>
+                      <ul class="nav d-flex flex-column mb-2 pb-1">
+                        <li class="nav-item"><a class="nav-link px-3" href="#!"><span class="me-2 text-900" data-feather="user"></span>个人信息</a></li>
+                        <li class="nav-item"><a class="nav-link px-3" href="#!"><span class="me-2 text-900" data-feather="pie-chart"></span>Dashboard</a></li>
+                        <li class="nav-item"><a class="nav-link px-3" href="#!"><span class="me-2 text-900" data-feather="lock"></span>Posts &amp; Activity</a></li>
+
+                      </ul>
+                    </div>
+                    <div class="card-footer p-0 border-top">
+                      <ul class="nav d-flex flex-column my-3">
+                        <li class="nav-item"><a class="nav-link px-3" href="#!"><span class="me-2 text-900" data-feather="user-plus"></span>Add another account</a></li>
+                      </ul>
+                      <hr>
+                      <div class="px-3"><a class="btn btn-phoenix-secondary d-flex flex-center w-100" href="/myApp/login"><span class="me-2" data-feather="log-out"></span>退出登录</a></div>
+                      <div class="my-2 text-center fw-bold fs--2 text-600"><a class="text-600 me-1" href="#!">Privacy policy</a>&bull;<a class="text-600 mx-1" href="#!">Terms</a>&bull;<a class="text-600 ms-1" href="#!">Cookies</a></div>
+                    </div>
+                  </div>
+                </div>
+              </li>
+            </ul>
+          </div>
+        </nav>
+        <div class="content pt-5">
+            <div class="pb-5">
+            <div class="row g-5">
+              <div class="col-12">
+                <h1>时间分析</h1>
+                <div class="mb-8">
+                </div>
+                    <div class="row flex-between-center mb-4 g-3">
+                        <div class="col-auto">
+                          <h3>{{ defultYear }}票房Top10</h3>
+                        </div>
+                        <div class="col-8 col-sm-4">
+                            <select class="form-select form-select-sm mt-2" id="select-gross-revenue-month" onchange="typeChange(event)">
+                            {% for year in topYearList %}
+                                {% if year == defultYear %}
+                                  <option selected value="{{ year }}">{{ year }}</option>
+                                {% else %}
+                                    <option value="{{ year }}">{{ year }}</option>
+                                {% endif %}
+                            {% endfor %}
+                          </select>
+                        </div>
+                    </div>
+
+                <div class="row align-items-center g-4">
+
+                </div>
+                <hr class="bg-200 mb-6 mt-4">
+
+
+                <div id="mainD" style="min-height:320px;width:100%"></div>
+              </div>
+
+            </div>
+          </div>
+          <div class="mx-n6 bg-white px-6 pt-7 pb-6 border-top border-300">
+            <div class="row g-5">
+              <div class="col-12 col-xl-6">
+                <div class="me-xl-4">
+                  <div>
+                    <h3>每年电影总票房</h3>
+                    <p class="text-700">Year Total Movie Box</p>
+                  </div>
+                  <div id="mainB" style="height:600px; width:100%"></div>
+                </div>
+              </div>
+              <div class="col-12 col-xl-6">
+                <div>
+                  <h3>每年电影平均评分和发行数量</h3>
+                  <p class="text-700">Year Mean Movie Rate And Year Movie Count</p>
+                </div>
+                <div id="mainC"  style="height:600px;"></div>
+              </div>
+            </div>
+          </div>
+          <footer class="footer">
+            <div class="row g-0 justify-content-between align-items-center h-100 mb-3">
+              <div class="col-12 col-sm-auto text-center">
+              </div>
+              <div class="col-12 col-sm-auto text-center">
+                <p class="mb-0 text-600">v1.0.0</p>
+              </div>
+            </div>
+          </footer>
+        </div>
+      </div>
+    </main>
+    <script src="/static/static/js/phoenix.js"></script>
+    <script src="/static/static/js/ecommerce-dashboard.js"></script>
+</body>
+
+<script src="/static/static/echarts.js"></script>
+
+
+
+
+  
+  <script>
+        var chartDom = document.getElementById('mainD');
+    var myChart1 = echarts.init(chartDom);
+    var option1;
+    function resizeChart() {
+        myChart1.resize();
+    }
+    window.addEventListener('resize', resizeChart);
+    option1 = {
+    backgroundColor: 'transparent',
+        tooltip: {
+            trigger: 'axis',
+            backgroundColor: 'rgba(0,0,0,0.8)',
+            borderColor: 'rgba(72,216,191,0.8)',
+            borderWidth: 1,
+            {#padding: [10, 15],#}
+            textStyle: {
+                color: '#fff',
+                fontSize: 14
+            },
+            axisPointer: {
+                type: 'shadow',
+                shadowStyle: {
+                    color: 'rgba(72,216,191,0.1)'
+                },
+                label: {
+                    backgroundColor: '#48D8BF'
+                }
+            },
+            formatter: function(params) {
+                return `<div style="font-weight:bold">${params[0].name}</div>
+                        <div style="display:flex;align-items:center;margin-top:5px">
+                            <span style="display:inline-block;width:10px;height:10px;background:linear-gradient(to right, #A9F387, #48D8BF);border-radius:50%;margin-right:8px"></span>
+                            票房: <span style="font-weight:bold;margin-left:5px">${params[0].value}</span>
+                        </div>`;
+            }
+        },
+        grid: {
+            top: '15%',
+            left: '0%',
+            right: '0%',
+            bottom: '-1%',
+            containLabel: true
+        },
+    xAxis: [{
+            data: {{ topMovieName | safe }},
+            axisLine: {
+                lineStyle: {
+                    color: 'rgba(255,255,255,0.3)'
+                }
+            },
+            axisLabel: {
+                color: 'rgba(1,1,1,0.7)',
+                fontSize: 12,
+                interval: 0,
+                rotate: 30
+            },
+            axisTick: {
+                show: true
+            }
+        }],
+    yAxis: [{
+            type: 'value',
+            splitNumber: 4,
+            splitLine: {
+                lineStyle: {
+                    type: 'dashed',
+                    color: 'rgba(1,1,1,0.1)'
+                }
+            },
+            axisLine: {
+                show: false
+            },
+            axisLabel: {
+                color: 'rgba(1,1,1,0.6)',
+                fontSize: 12
+            },
+            axisTick: {
+                show: false
+            },
+            nameTextStyle: {
+                color: 'rgba(255,255,255,0.6)'
+            }
+        }],
+    series: [{
+            name: '票房',
+            type: 'line',
+            data: {{ topMovieTicket | safe }},
+            symbol: 'circle',
+            symbolSize: 10,
+            lineStyle: {
+                width: 4,
+                color: new echarts.graphic.LinearGradient(0, 0, 1, 0, [
+                    { offset: 0, color: '#A9F387' },
+                    { offset: 1, color: '#48D8BF' }
+                ]),
+                shadowColor: 'rgba(72,216,191,0.3)',
+                shadowBlur: 10,
+                shadowOffsetY: 5
+            },
+            itemStyle: {
+                color: '#fff',
+                borderColor: '#48D8BF',
+                borderWidth: 2,
+                shadowColor: 'rgba(72,216,191,0.3)',
+                shadowBlur: 5,
+                shadowOffsetY: 3
+            },
+            areaStyle: {
+                color: new echarts.graphic.LinearGradient(0, 0, 0, 1, [
+                    { offset: 0, color: 'rgba(169,243,135,0.3)' },
+                    { offset: 1, color: 'rgba(72,216,191,0.1)' }
+                ])
+            },
+            smooth: true,
+            animationEasing: 'elasticOut',
+            animationDuration: 1500
+        }]
+};
+// 添加加载动画
+    myChart1.showLoading({
+        text: '正在加载数据...',
+        color: '#48D8BF',
+        textColor: '#fff',
+        maskColor: 'rgba(0, 0, 0, 0.7)',
+        zlevel: 0
+    });
+    setTimeout(function() {
+        myChart1.hideLoading();
+        option1 && myChart1.setOption(option1);
+
+    }, 50);
+
+</script>
+<script>
+    var chartDom = document.getElementById('mainB');
+    var myChart = echarts.init(chartDom, 'vintage');  // 使用内置主题
+    var option;
+
+    function resizeChart() {
+        myChart.resize();
+    }
+    window.addEventListener('resize', resizeChart);
+
+    option = {
+    backgroundColor: '#F8FAFF',
+    tooltip: {
+        trigger: 'axis',
+        axisPointer: {
+            type: 'shadow'
+        },
+        formatter: function(params) {
+            return `年份: ${params[0].name}<br/>票房: <b>${params[0].value} 元</b>`;
+        },
+        backgroundColor: 'rgba(50,50,50,0.9)',
+        borderColor: '#333',
+        textStyle: {
+            color: '#fff'
+        }
+    },
+    grid: {
+        left: '3%',
+        right: '4%',
+        bottom: '10%',
+        top: '15%',
+        containLabel: true
+    },
+    xAxis: {
+        type: 'category',
+        data: {{ yeatTotalList|safe }},
+        axisLine: {
+            lineStyle: {
+                color: '#999'
+            }
+        },
+        axisTick: {
+            alignWithLabel: true,
+            lineStyle: {
+                color: '#ddd'
+            }
+        },
+        axisLabel: {
+            color: '#666',
+            fontSize: 12,
+            interval: 0,
+            rotate: {{ yeatTotalList|length }} > 10 ? 45 : 0
+        }
+    },
+    yAxis: {
+        type: 'value',
+        name: '票房',
+        nameTextStyle: {
+            color: '#666',
+            fontSize: 12,
+            padding: [0, 0, 0, 40]
+        },
+        axisLine: {
+            show: true,
+            lineStyle: {
+                color: '#999'
+            }
+        },
+        axisTick: {
+            show: true,
+            lineStyle: {
+                color: '#ddd'
+            }
+        },
+        splitLine: {
+            lineStyle: {
+                type: 'dashed',
+                color: '#eee'
+            }
+        },
+        axisLabel: {
+            color: '#666',
+            formatter: '{value}'
+        }
+    },
+    dataZoom: [
+        {
+            type: 'slider',
+            show: {{ yeatTotalList|length }} > 10,
+            xAxisIndex: 0,
+            filterMode: 'filter',
+            height: 20,
+            bottom: 5,
+            start: 0,
+            end: {{ yeatTotalList|length }} > 10 ? 50 : 100,
+            handleIcon: 'M10.7,11.9v-1.3H9.3v1.3c-4.9,0.3-8.8,4.4-8.8,9.4c0,5,3.9,9.1,8.8,9.4v1.3h1.3v-1.3c4.9-0.3,8.8-4.4,8.8-9.4C19.5,16.3,15.6,12.2,10.7,11.9z M13.3,24.4H6.7V23h6.6V24.4z M13.3,19.6H6.7v-1.4h6.6V19.6z',
+            handleSize: '80%',
+            handleStyle: {
+                color: '#fff',
+                shadowBlur: 3,
+                shadowColor: 'rgba(0, 0, 0, 0.6)',
+                shadowOffsetX: 2,
+                shadowOffsetY: 2
+            },
+            textStyle: {
+                color: '#333'
+            },
+            brushSelect: false
+        }
+    ],
+    series: [
+        {
+            name: '票房',
+            type: 'bar',
+            barWidth: '60%',
+            data: {{ yearTotalTicket|safe }},
+            itemStyle: {
+                color: new echarts.graphic.LinearGradient(0, 0, 0, 1, [
+                    { offset: 0, color: '#83bff6' },
+                    { offset: 0.5, color: '#188df0' },
+                    { offset: 1, color: '#188df0' }
+                ]),
+                borderRadius: [4, 4, 0, 0],
+                shadowColor: 'rgba(0, 0, 0, 0.1)',
+                shadowBlur: 10,
+                shadowOffsetY: 5
+            },
+            emphasis: {
+                itemStyle: {
+                    color: new echarts.graphic.LinearGradient(0, 0, 0, 1, [
+                        { offset: 0, color: '#f7a35c' },
+                        { offset: 0.5, color: '#f08200' },
+                        { offset: 1, color: '#f08200' }
+                    ]),
+                    shadowColor: 'rgba(0, 0, 0, 0.3)',
+                    shadowBlur: 15,
+                    shadowOffsetY: 8
+                }
+            },
+            label: {
+                show: true,
+                position: 'top',
+                distance: 10,
+                color: '#188df0',
+                fontSize: 12,
+                fontWeight: 'bold',
+                formatter: function(params) {
+                    return params.value.toFixed(1);
+                }
+            }
+        }
+    ],
+    toolbox: {
+        right: 20,
+        top: 15,
+        feature: {
+            saveAsImage: {
+                title: '保存图片',
+                pixelRatio: 2
+            },
+            dataView: {
+                title: '数据视图',
+                readOnly: true,
+                lang: ['数据视图', '关闭', '刷新'],
+                optionToContent: function(opt) {
+                    const axisData = opt.xAxis[0].data;
+                    const seriesData = opt.series[0].data;
+                    let table = '<table style="width:100%; text-align:center"><tbody><tr><th>年份</th><th>票房(亿元)</th></tr>';
+                    for (let i = 0; i < axisData.length; i++) {
+                        table += `<tr><td>${axisData[i]}</td><td>${seriesData[i].toFixed(1)}</td></tr>`;
+                    }
+                    table += '</tbody></table>';
+                    return table;
+                }
+            },
+            magicType: {
+                title: {
+                    line: '折线图',
+                    bar: '柱状图'
+                },
+                type: ['line', 'bar']
+            },
+            restore: {
+                title: '重置'
+            }
+        }
+    }
+};
+
+
+    // 响应式配置
+    window.addEventListener('resize', function() {
+        myChart.resize();
+    });
+
+    option && myChart.setOption(option);
+</script>
+
+<script>
+    var chartDom = document.getElementById('mainC');
+    var myChart = echarts.init(chartDom, 'vintage');
+    var option;
+
+    // 响应式调整
+    function resizeChart() {
+        myChart.resize();
+    }
+    window.addEventListener('resize', resizeChart);
+
+    // 现代配色方案
+    const colorPalette = {
+        primary: '#6E8BED',
+        primaryGradient: ['#6E8BED', '#4A6FD9', '#2E55C5'],
+        secondary: '#7ED957',
+        secondaryGradient: ['#7ED957', '#5EBF3A', '#3FA518'],
+        background: '#F8FAFF',
+        text: '#4A5568',
+        lightText: '#718096',
+        tooltipBg: 'rgba(30, 41, 59, 0.95)'
+    };
+
+    option = {
+        backgroundColor: colorPalette.background,
+        animationDuration: 1500,
+        animationEasing: 'cubicOut',
+        tooltip: {
+            trigger: 'axis',
+            axisPointer: {
+                type: 'cross',
+                crossStyle: {
+                    color: '#999',
+                    width: 1.5
+                }
+            },
+            formatter: function(params) {
+                let result = `<div style="font-weight:bold;margin-bottom:5px">${params[0].name}年</div>`;
+                params.forEach(item => {
+                    const icon = item.seriesType === 'bar' ? '●' : '◆';
+                    const value = item.seriesName === '平均评分' 
+                        ? item.value.toFixed(1) 
+                        : item.value;
+                    result += `
+                        <div style="display:flex;align-items:center;margin:3px 0">
+                            <span style="color:${item.color};margin-right:8px">${icon}</span>
+                            <span style="flex:1">${item.seriesName}:</span>
+                            <span style="font-weight:bold">${value}</span>
+                        </div>`;
+                });
+                return result;
+            },
+            backgroundColor: colorPalette.tooltipBg,
+            borderColor: 'rgba(255,255,255,0.1)',
+            textStyle: {
+                color: '#FFF',
+                fontSize: 12,
+                lineHeight: 20
+            },
+            extraCssText: 'box-shadow: 0 4px 20px rgba(0,0,0,0.15);border-radius:6px;padding:12px'
+        },
+        legend: {
+            data: ['平均评分', '电影数量'],
+            right: 20,
+            top: 10,
+            itemGap: 20,
+            textStyle: {
+                color: colorPalette.text,
+                fontSize: 12,
+                fontWeight: '500'
+            },
+            itemWidth: 12,
+            itemHeight: 12,
+            itemStyle: {
+                borderWidth: 0
+            }
+        },
+        grid: {
+            left: '3%',
+            right: '4%',
+            bottom: '15%',
+            top: '20%',
+            containLabel: true
+        },
+        xAxis: {
+            type: 'category',
+            data: {{ merged_years | safe }},
+            axisPointer: {
+                type: 'shadow',
+                shadowStyle: {
+                    color: 'rgba(150,150,150,0.1)'
+                }
+            },
+            axisLine: {
+                lineStyle: {
+                    color: '#E2E8F0',
+                    width: 1.5
+                }
+            },
+            axisTick: {
+                alignWithLabel: true,
+                lineStyle: {
+                    color: '#E2E8F0'
+                },
+                length: 4
+            },
+            axisLabel: {
+                color: colorPalette.lightText,
+                fontSize: 11,
+                interval: 0,
+                rotate: 45,
+                margin: 15,
+                fontFamily: 'sans-serif'
+            }
+        },
+        yAxis: [
+            {
+                type: 'value',
+                name: '平均评分',
+                nameTextStyle: {
+                    color: colorPalette.primary,
+                    padding: [0, 0, 0, 40],
+                    fontSize: 12
+                },
+                min: 0,
+                max: 100,
+                interval: 10,
+                axisLine: {
+                    show: true,
+                    lineStyle: {
+                        color: '#E2E8F0'
+                    }
+                },
+                axisLabel: {
+                    formatter: '{value}',
+                    color: colorPalette.primary,
+                    fontSize: 11
+                },
+                splitLine: {
+                    lineStyle: {
+                        color: '#EDF2F7',
+                        type: 'dashed'
+                    }
+                }
+            },
+            {
+                type: 'value',
+                name: '电影数量',
+                nameTextStyle: {
+                    color: colorPalette.secondary,
+                    padding: [0, 0, 0, 40],
+                    fontSize: 12
+                },
+                axisLine: {
+                    show: true,
+                    lineStyle: {
+                        color: '#E2E8F0'
+                    }
+                },
+                axisLabel: {
+                    formatter: '{value}',
+                    color: colorPalette.secondary,
+                    fontSize: 11
+                },
+                splitLine: {
+                    show: false
+                }
+            }
+        ],
+        dataZoom: [
+            {
+                type: 'slider',
+                show: {{ merged_years|length }} > 10,
+                xAxisIndex: 0,
+                filterMode: 'filter',
+                height: 20,
+                bottom: 30,
+                start: 0,
+                end: {{ merged_years|length }} > 10 ? 50 : 100,
+                handleIcon: 'M10.7,11.9v-1.3H9.3v1.3c-4.9,0.3-8.8,4.4-8.8,9.4c0,5,3.9,9.1,8.8,9.4v1.3h1.3v-1.3c4.9-0.3,8.8-4.4,8.8-9.4C19.5,16.3,15.6,12.2,10.7,11.9z M13.3,24.4H6.7V23h6.6V24.4z M13.3,19.6H6.7v-1.4h6.6V19.6z',
+                handleSize: '80%',
+                handleStyle: {
+                    color: '#FFF',
+                    shadowBlur: 6,
+                    shadowColor: 'rgba(0, 0, 0, 0.2)',
+                    shadowOffsetX: 1,
+                    shadowOffsetY: 2
+                },
+                textStyle: {
+                    color: colorPalette.text
+                },
+                brushSelect: false,
+                backgroundColor: '#EDF2F7',
+                fillerColor: 'rgba(110, 139, 237, 0.2)',
+                borderColor: '#E2E8F0',
+                borderRadius: 6
+            }
+        ],
+        series: [
+            {
+                name: '平均评分',
+                type: 'line',
+                barWidth: '35%',
+                yAxisIndex: 0,
+                data: {{ merged_rates | safe }},
+                itemStyle: {
+                    color: new echarts.graphic.LinearGradient(0, 0, 0, 1, colorPalette.primaryGradient.map((color, i) => ({
+                        offset: i / (colorPalette.primaryGradient.length - 1),
+                        color
+                    }))),
+                    borderRadius: [6, 6, 0, 0],
+                    shadowColor: 'rgba(74, 111, 217, 0.3)',
+                    shadowBlur: 8,
+                    shadowOffsetY: 4
+                },
+                emphasis: {
+                    itemStyle: {
+                        shadowColor: 'rgba(74, 111, 217, 0.5)',
+                        shadowBlur: 12,
+                        shadowOffsetY: 6
+                    }
+                },
+                label: {
+                    show: true,
+                    position: 'top',
+                    distance: 8,
+                    color: colorPalette.primary,
+                    fontSize: 11,
+                    fontWeight: '600',
+                    formatter: function(params) {
+                        return params.value.toFixed(1);
+                    }
+                },
+                animationDelay: function(idx) {
+                    return idx * 100;
+                }
+            },
+            {
+                name: '电影数量',
+                type: 'bar',
+                barWidth: '35%',
+                yAxisIndex: 1,
+                data: {{ merged_counts | safe }},
+                itemStyle: {
+                    color: new echarts.graphic.LinearGradient(0, 0, 0, 1, colorPalette.secondaryGradient.map((color, i) => ({
+                        offset: i / (colorPalette.secondaryGradient.length - 1),
+                        color
+                    }))),
+                    borderRadius: [6, 6, 0, 0],
+                    shadowColor: 'rgba(94, 191, 58, 0.3)',
+                    shadowBlur: 8,
+                    shadowOffsetY: 4
+                },
+                emphasis: {
+                    itemStyle: {
+                        shadowColor: 'rgba(94, 191, 58, 0.5)',
+                        shadowBlur: 12,
+                        shadowOffsetY: 6
+                    }
+                },
+                label: {
+                    show: true,
+                    position: 'top',
+                    distance: 8,
+                    color: colorPalette.secondary,
+                    fontSize: 11,
+                    fontWeight: '600',
+                    formatter: '{c}'
+                },
+                animationDelay: function(idx) {
+                    return idx * 100 + 100;
+                }
+            }
+        ],
+        toolbox: {
+            right: 20,
+            top: 50,
+            feature: {
+                saveAsImage: {
+                    title: '保存图片',
+                    pixelRatio: 2,
+                    backgroundColor: colorPalette.background,
+                    iconStyle: {
+                        borderColor: colorPalette.text
+                    }
+                },
+                dataView: {
+                    title: '数据视图',
+                    readOnly: true,
+                    lang: ['数据视图', '关闭', '刷新'],
+                    backgroundColor: colorPalette.background,
+                    textareaColor: colorPalette.background,
+                    textareaBorderColor: '#E2E8F0',
+                    buttonColor: colorPalette.primary,
+                    buttonTextColor: '#FFF',
+                    optionToContent: function(opt) {
+                        const axisData = opt.xAxis[0].data;
+                        const rateData = opt.series[0].data;
+                        const countData = opt.series[1].data;
+                        let table = `
+                            <style>
+                                .data-view-table {
+                                    width:100%; 
+                                    border-collapse:collapse;
+                                    font-size:12px;
+                                    color:${colorPalette.text};
+                                }
+                                .data-view-table th, .data-view-table td {
+                                    padding:8px 12px;
+                                    text-align:center;
+                                    border:1px solid #E2E8F0;
+                                }
+                                .data-view-table th {
+                                    background-color:#EDF2F7;
+                                    font-weight:600;
+                                }
+                                .data-view-table tr:nth-child(even) {
+                                    background-color:#F8FAFF;
+                                }
+                            </style>
+                            <table class="data-view-table">
+                                <thead>
+                                    <tr>
+                                        <th>年份</th>
+                                        <th>平均评分</th>
+                                        <th>电影数量</th>
+                                    </tr>
+                                </thead>
+                                <tbody>`;
+                        
+                        for (let i = 0; i < axisData.length; i++) {
+                            table += `
+                                <tr>
+                                    <td>${axisData[i]}</td>
+                                    <td>${rateData[i].toFixed(1)}</td>
+                                    <td>${countData[i]}</td>
+                                </tr>`;
+                        }
+                        table += '</tbody></table>';
+                        return table;
+                    }
+                },
+                magicType: {
+                    title: {
+                        line: '折线图',
+                        bar: '柱状图'
+                    },
+                    type: ['line', 'bar'],
+                    iconStyle: {
+                        borderColor: colorPalette.text
+                    }
+                },
+                restore: {
+                    title: '重置',
+                    iconStyle: {
+                        borderColor: colorPalette.text
+                    }
+                }
+            },
+            iconStyle: {
+                borderColor: colorPalette.text,
+                emphasis: {
+                    borderColor: colorPalette.primary
+                }
+            }
+        }
+    };
+
+    option && myChart.setOption(option);
+
+    // 响应式调整
+    window.addEventListener('resize', function() {
+        myChart.resize();
+    });
+</script>
+
+
+
+<script>
+    function typeChange(e){
+        location.href = 'http://localhost:8000/myApp/timeChart?yearName=' + e.target.value
+    }
+</script>
+</html>
