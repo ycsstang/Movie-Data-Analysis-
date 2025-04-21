@@ -236,5 +236,4 @@ def totalMovies(request):
         'page':page,
         'page_obj':page_obj,
         'search_query':search_query,
-
     })
